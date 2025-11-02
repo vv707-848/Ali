@@ -1,816 +1,2158 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>النخبة العقارية — منصة احترافية</title>
-  <meta name="description" content="النخبة العقارية — منصة عقارية احترافية للبيع. تواصل عبر واتساب مباشرة مع الوسيط أو المدير.">
-  <style>
-    /* ---------------- Design (modern, RTL, professional) ---------------- */
-    :root{
-      --bg: #0f172a10;
-      --card: #ffffff;
-      --muted: #6b7280;
-      --accent: #0b6cf5;
-      --accent-2: #0b87ff;
-      --glass: rgba(255,255,255,0.75);
-      --danger: #ef4444;
-      --success: #16a34a;
-      --radius: 14px;
-      font-family: Inter, "Noto Sans Arabic", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;background:linear-gradient(180deg,#f3f7ff 0%, #f7fbff 50%);color:#0b1220}
-    a{color:inherit;text-decoration:none}
-    /* header */
-    header{position:sticky;top:0;z-index:90;background:rgba(255,255,255,0.9);backdrop-filter:blur(6px);border-bottom:1px solid #eef4ff;padding:12px 24px;display:flex;align-items:center;gap:16px}
-    .container{max-width:1200px;margin:18px auto;padding:0 18px}
-    .logo{display:flex;align-items:center;gap:12px}
-    .logo img{width:56px;height:56px;border-radius:12px;object-fit:cover;box-shadow:0 6px 20px rgba(11,108,245,0.06)}
-    .brand-title{font-weight:800;font-size:18px}
-    .brand-sub{color:var(--muted);font-size:13px}
-    .top-actions{margin-left:auto;display:flex;gap:10px;align-items:center}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>النخبة العقارية - منصة عقارية احترافية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* button */
-    .btn{display:inline-flex;gap:8px;align-items:center;padding:10px 14px;border-radius:12px;border:0;cursor:pointer;background:var(--accent);color:white;font-weight:700;box-shadow:0 8px 30px rgba(11,108,245,0.08)}
-    .btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(11,108,245,0.12);box-shadow:none}
-    .btn.small{padding:8px 10px;border-radius:10px;font-weight:700}
+        :root {
+            --primary-color: #1a4d2e;
+            --secondary-color: #2d6a4f;
+            --accent-color: #d4af37;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --text-dark: #2c3e50;
+            --text-light: #6c757d;
+            --border-color: #dee2e6;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --shadow: 0 2px 15px rgba(0,0,0,0.1);
+            --shadow-hover: 0 5px 25px rgba(0,0,0,0.15);
+        }
 
-    /* hero & search */
-    .hero{display:flex;gap:18px;align-items:stretch;margin-top:18px}
-    .search-panel{flex:1;background:linear-gradient(180deg,#fff,#f8fbff);padding:18px;border-radius:16px;box-shadow:0 12px 40px rgba(2,6,23,0.06)}
-    .search-row{display:flex;gap:10px;align-items:center}
-    input,select,textarea{padding:12px;border-radius:10px;border:1px solid #eef3ff;font-size:15px}
-    input::placeholder{color:#9aa4c4}
-    .cats{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Apple Color Emoji', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
 
-    /* layout */
-    .grid{display:grid;grid-template-columns:1fr 360px;gap:20px;margin-top:20px}
-    .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
-    .card{background:var(--card);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:transform .18s,box-shadow .18s;box-shadow:0 10px 30px rgba(2,6,23,0.06)}
-    .card:hover{transform:translateY(-8px);box-shadow:0 20px 60px rgba(2,6,23,0.09)}
-    .thumb{height:180px;background:linear-gradient(90deg,#eef6ff,#f8fbff);display:flex;align-items:center;justify-content:center}
-    .thumb img{width:100%;height:100%;object-fit:cover}
-    .card-body{padding:12px;display:flex;flex-direction:column;gap:8px}
-    .price{color:var(--accent);font-weight:900;font-size:16px}
-    .meta{color:var(--muted);font-size:13px}
-    .card-actions{display:flex;gap:8px;padding:12px;border-top:1px solid #f3f6fb}
+        .hidden {
+            display: none !important;
+        }
 
-    /* aside */
-    .panel{background:linear-gradient(180deg,#fff,#fcfeff);padding:12px;border-radius:12px;box-shadow:0 12px 36px rgba(2,6,23,0.06)}
-    .stat-row{display:flex;gap:12px;align-items:center;justify-content:space-between}
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-    /* modal (forms) */
-    .modal-back{position:fixed;inset:0;background:rgba(2,6,23,0.5);display:none;align-items:center;justify-content:center;z-index:120}
-    .modal{width:940px;max-width:95%;background:var(--card);border-radius:14px;padding:18px;box-shadow:0 30px 80px rgba(2,6,23,0.2);max-height:90vh;overflow:auto}
-    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .full{grid-column:1/-1}
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
 
-    /* dashboard */
-    .dashboard{display:flex;gap:18px;align-items:flex-start}
-    .sidebar{min-width:260px;background:var(--card);padding:12px;border-radius:12px;box-shadow:0 12px 36px rgba(2,6,23,0.06)}
-    .table{width:100%;border-collapse:collapse}
-    .table th,.table td{padding:8px;border-bottom:1px solid #f3f6fb;text-align:right;font-size:13px}
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
 
-    /* uploader preview */
-    .images-preview{display:flex;gap:8px;flex-wrap:wrap}
-    .img-thumb{width:100px;height:70px;border-radius:8px;overflow:hidden;box-shadow:0 6px 20px rgba(2,6,23,0.06)}
-    .img-thumb img{width:100%;height:100%;object-fit:cover}
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
 
-    /* responsive */
-    @media(max-width:980px){ .grid{grid-template-columns:1fr} .hero{flex-direction:column} .sidebar{display:none} }
-  </style>
+        .btn-accent {
+            background: var(--accent-color);
+            color: var(--text-dark);
+        }
+
+        .btn-accent:hover {
+            background: #c4a02a;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+            font-size: 16px;
+            padding: 15px 30px;
+        }
+
+        .btn-whatsapp:hover {
+            background: #1fb855;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--accent-color);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .user-info {
+            background: rgba(255,255,255,0.1);
+            padding: 8px 16px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .login-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .login-card {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-hover);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .login-card h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(26, 77, 46, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .dashboard {
+            padding: 30px 0;
+        }
+
+        .dashboard-header {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .dashboard-header h2 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .stat-icon.primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .stat-icon.accent {
+            background: linear-gradient(135deg, var(--accent-color), #c4a02a);
+            color: white;
+        }
+
+        .stat-icon.success {
+            background: linear-gradient(135deg, var(--success), #20c997);
+            color: white;
+        }
+
+        .stat-content h3 {
+            font-size: 32px;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .stat-content p {
+            color: var(--text-light);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            border: 2px solid var(--border-color);
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th,
+        table td {
+            padding: 15px;
+            text-align: right;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        table th {
+            background: var(--bg-light);
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        table tr:hover {
+            background: var(--bg-light);
+        }
+
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .property-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .property-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .property-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background: var(--bg-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 48px;
+        }
+
+        .property-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .property-content {
+            padding: 20px;
+        }
+
+        .property-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .property-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+
+        .property-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .property-detail {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .property-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .category-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .category-icon {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .category-icon:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .category-icon i {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .category-icon:hover i {
+            color: white;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .modal-header h3 {
+            color: var(--primary-color);
+            font-size: 24px;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--danger);
+        }
+
+        .image-upload-container {
+            margin-bottom: 20px;
+        }
+
+        .image-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .image-preview-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 1;
+        }
+
+        .image-preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .remove-image {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .property-detail-page {
+            padding: 30px 0;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .image-gallery {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            background: var(--bg-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            color: var(--text-light);
+        }
+
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+        }
+
+        .thumbnail {
+            aspect-ratio: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .thumbnail:hover,
+        .thumbnail.active {
+            border-color: var(--primary-color);
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .detail-info {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .detail-info h1 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .detail-price {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .detail-specs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .spec-item {
+            background: var(--bg-light);
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .spec-item i {
+            color: var(--primary-color);
+            font-size: 20px;
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .badge-warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .badge-primary {
+            background: rgba(26, 77, 46, 0.1);
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .property-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-specs {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .modal-content {
+                padding: 20px;
+            }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-light);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+        }
+
+        .empty-state i {
+            font-size: 64px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .sort-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .back-button {
+            margin-bottom: 20px;
+        }
+
+        .not-found-button {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 100;
+            box-shadow: var(--shadow-hover);
+        }
+
+        @media (max-width: 768px) {
+            .not-found-button {
+                bottom: 20px;
+                left: 20px;
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="container" style="display:flex;align-items:center;">
-      <div class="logo">
-        <img id="logo-preview" src="" alt="logo">
-        <div>
-          <div class="brand-title">النخبة العقارية</div>
-          <div class="brand-sub">منصة احترافية للبيع — تواصل عبر واتساب</div>
+
+    <header id="publicHeader">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-building"></i>
+                    النخبة العقارية
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-accent" onclick="showLoginModal()">
+                        <i class="fas fa-sign-in-alt"></i>
+                        تسجيل الدخول
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="top-actions">
-        <button class="btn ghost" id="btn-home">الصفحة الرئيسية</button>
-        <button class="btn" id="btn-open-login">تسجيل دخول</button>
-      </div>
+    </header>
+
+    <header id="adminHeader" class="hidden">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-building"></i>
+                    النخبة العقارية
+                </div>
+                <div class="header-actions">
+                    <div class="user-info">
+                        <i class="fas fa-user"></i>
+                        <span id="currentUserName"></span>
+                    </div>
+                    <button class="btn" onclick="showPublicView()" style="background: rgba(255,255,255,0.2); color: white;">
+                        <i class="fas fa-home"></i>
+                        الصفحة الرئيسية
+                    </button>
+                    <button class="btn btn-danger" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        تسجيل الخروج
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="appContainer">
+
+        <div id="adminDashboard" class="hidden">
+            <div class="container dashboard">
+                <div class="dashboard-header">
+                    <h2>لوحة تحكم المدير</h2>
+                    <p>إدارة شاملة للعقارات والوسطاء</p>
+                </div>
+
+                <div class="stats-grid" id="adminStats"></div>
+
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchTab('properties')">
+                        <i class="fas fa-home"></i> العقارات
+                    </button>
+                    <button class="tab-btn" onclick="switchTab('brokers')">
+                        <i class="fas fa-users"></i> الوسطاء
+                    </button>
+                    <button class="tab-btn" onclick="switchTab('settings')">
+                        <i class="fas fa-cog"></i> الإعدادات
+                    </button>
+                </div>
+
+                <div id="propertiesTab" class="tab-content active">
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <h3>إدارة العقارات</h3>
+                            <button class="btn btn-primary" onclick="openPropertyModal()">
+                                <i class="fas fa-plus"></i> إضافة عقار جديد
+                            </button>
+                        </div>
+                        <div id="adminPropertiesList"></div>
+                    </div>
+                </div>
+
+                <div id="brokersTab" class="tab-content">
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <h3>إدارة الوسطاء</h3>
+                            <button class="btn btn-primary" onclick="openBrokerModal()">
+                                <i class="fas fa-user-plus"></i> إضافة وسيط جديد
+                            </button>
+                        </div>
+                        <div id="brokersList"></div>
+                    </div>
+                </div>
+
+                <div id="settingsTab" class="tab-content">
+                    <div class="card">
+                        <h3>إعدادات الموقع</h3>
+                        <form id="settingsForm" style="margin-top: 20px;">
+                            <div class="form-group">
+                                <label>رقم واتساب المدير (بالصيغة الدولية)</label>
+                                <input type="text" id="adminWhatsapp" placeholder="966535342404">
+                            </div>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save"></i> حفظ الإعدادات
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="brokerDashboard" class="hidden">
+            <div class="container dashboard">
+                <div class="dashboard-header">
+                    <h2>لوحة تحكم الوسيط</h2>
+                    <p>إدارة عقاراتك الخاصة</p>
+                </div>
+
+                <div class="stats-grid" id="brokerStats"></div>
+
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchTab('myProperties')">
+                        <i class="fas fa-home"></i> عقاراتي
+                    </button>
+                    <button class="tab-btn" onclick="switchTab('profile')">
+                        <i class="fas fa-user"></i> الملف الشخصي
+                    </button>
+                </div>
+
+                <div id="myPropertiesTab" class="tab-content active">
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <h3>عقاراتي</h3>
+                            <button class="btn btn-primary" onclick="openPropertyModal()">
+                                <i class="fas fa-plus"></i> إضافة عقار جديد
+                            </button>
+                        </div>
+                        <div id="brokerPropertiesList"></div>
+                    </div>
+                </div>
+
+                <div id="profileTab" class="tab-content">
+                    <div class="card">
+                        <h3>الملف الشخصي</h3>
+                        <form id="profileForm" style="margin-top: 20px;">
+                            <div class="form-group">
+                                <label>رقم واتساب (بالصيغة الدولية)</label>
+                                <input type="text" id="brokerWhatsapp" placeholder="966500000000" required>
+                                <small style="color: var(--text-light);">هذا الرقم سيظهر للعملاء عند الاستفسار عن عقاراتك</small>
+                            </div>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save"></i> حفظ
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="publicView" class="hidden">
+            <div class="container" style="padding: 30px 20px;">
+                <div class="filter-section">
+                    <h3 style="margin-bottom: 15px;">البحث عن عقار</h3>
+                    <div class="filter-grid">
+                        <div class="form-group">
+                            <label>نوع العقار</label>
+                            <select id="filterType">
+                                <option value="">الكل</option>
+                                <option value="عمارة">عمارة</option>
+                                <option value="فيلا">فيلا</option>
+                                <option value="شقة">شقة</option>
+                                <option value="أرض">أرض</option>
+                                <option value="استراحة">استراحة</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>المنطقة</label>
+                            <select id="filterRegion">
+                                <option value="">الكل</option>
+                                <option value="شمال الطائف">شمال الطائف</option>
+                                <option value="جنوب الطائف">جنوب الطائف</option>
+                                <option value="شرق الطائف">شرق الطائف</option>
+                                <option value="غرب الطائف">غرب الطائف</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>السعر من</label>
+                            <input type="number" id="filterPriceMin" placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label>السعر إلى</label>
+                            <input type="number" id="filterPriceMax" placeholder="بدون حد">
+                        </div>
+                        <div class="form-group">
+                            <label>المساحة من</label>
+                            <input type="number" id="filterAreaMin" placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label>يوجد صك</label>
+                            <select id="filterDeed">
+                                <option value="">الكل</option>
+                                <option value="نعم">نعم</option>
+                                <option value="لا">لا</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <button class="btn btn-primary" onclick="applyFilters()">
+                            <i class="fas fa-search"></i> بحث
+                        </button>
+                        <button class="btn" onclick="clearFilters()" style="background: var(--text-light); color: white;">
+                            <i class="fas fa-redo"></i> إعادة تعيين
+                        </button>
+                    </div>
+                </div>
+
+                <div class="category-icons">
+                    <div class="category-icon" onclick="filterByType('عمارة')">
+                        <i class="fas fa-building"></i>
+                        <div>عمارة</div>
+                    </div>
+                    <div class="category-icon" onclick="filterByType('فيلا')">
+                        <i class="fas fa-home"></i>
+                        <div>فيلا</div>
+                    </div>
+                    <div class="category-icon" onclick="filterByType('شقة')">
+                        <i class="fas fa-door-open"></i>
+                        <div>شقة</div>
+                    </div>
+                    <div class="category-icon" onclick="filterByType('أرض')">
+                        <i class="fas fa-map"></i>
+                        <div>أرض</div>
+                    </div>
+                    <div class="category-icon" onclick="filterByType('استراحة')">
+                        <i class="fas fa-umbrella-beach"></i>
+                        <div>استراحة</div>
+                    </div>
+                </div>
+
+                <div class="sort-options">
+                    <button class="btn" onclick="sortProperties('newest')">
+                        <i class="fas fa-clock"></i> الأحدث
+                    </button>
+                    <button class="btn" onclick="sortProperties('mostViewed')">
+                        <i class="fas fa-eye"></i> الأكثر مشاهدة
+                    </button>
+                    <button class="btn" onclick="sortProperties('priceLow')">
+                        <i class="fas fa-sort-amount-down"></i> السعر: من الأقل
+                    </button>
+                    <button class="btn" onclick="sortProperties('priceHigh')">
+                        <i class="fas fa-sort-amount-up"></i> السعر: من الأعلى
+                    </button>
+                </div>
+
+                <div class="property-grid" id="publicPropertiesList"></div>
+            </div>
+
+            <button class="btn btn-whatsapp not-found-button" onclick="notFoundWhatsApp()">
+                <i class="fab fa-whatsapp"></i>
+                لم أجد العقار المناسب
+            </button>
+        </div>
+
+        <div id="propertyDetailView" class="hidden">
+            <div class="container property-detail-page">
+                <button class="btn back-button" onclick="backFromDetail()">
+                    <i class="fas fa-arrow-right"></i> العودة
+                </button>
+                <div id="propertyDetailContent"></div>
+            </div>
+        </div>
     </div>
-  </header>
 
-  <main class="container">
-    <!-- HERO / SEARCH -->
-    <section class="hero">
-      <div class="search-panel">
-        <h2 style="margin:0 0 6px 0">ابحث عن عقارك التالي</h2>
-        <p style="margin:0 0 12px;color:var(--muted)">فلتر شامل وسهل — اختر النوع، المنطقة، أو اكتب ما تريد.</p>
-
-        <div class="search-row">
-          <input id="q" placeholder="مثال: فيلا فاخرة، الحوية، 1500000"/>
-          <select id="filter-type"><option value="">كل الأقسام</option><option>فيلا</option><option>شقة</option><option>عمارة</option><option>أرض</option><option>استراحة</option></select>
-          <select id="filter-region"><option value="">كل المناطق</option><option>شمال الطائف</option><option>جنوب الطائف</option><option>شرق الطائف</option><option>غرب الطائف</option></select>
-          <button class="btn" id="btn-search">ابحث</button>
-        </div>
-
-        <div class="cats" style="margin-top:12px">
-          <div class="cat" data-type="فيلا">🏡 فيلا</div>
-          <div class="cat" data-type="شقة">🏘 شقة</div>
-          <div class="cat" data-type="عمارة">🏢 عمارة</div>
-          <div class="cat" data-type="أرض">🟩 أرض</div>
-          <div class="cat" data-type="استراحة">🌴 استراحة</div>
-        </div>
-      </div>
-
-      <aside style="width:360px">
-        <div class="panel">
-          <h3 style="margin-top:0">لم أجد العقار المناسب</h3>
-          <p style="color:var(--muted)">اضغط وسنتواصل معك شخصياً.</p>
-          <button class="btn" id="not-found">لم أجد العقار المناسب</button>
-          <hr style="margin:12px 0;border:none;border-top:1px dashed #eef4ff">
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <div>
-              <div class="meta">اتصل بالمدير</div>
-              <div style="font-weight:800;margin-top:6px" id="manager-number">0535342404</div>
+    <div id="propertyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="propertyModalTitle">إضافة عقار جديد</h3>
+                <button class="close-modal" onclick="closePropertyModal()">&times;</button>
             </div>
-            <div style="text-align:left">
-              <small class="meta">يوزر تجريبي</small>
-              <div style="font-weight:800">IVL511</div>
-            </div>
-          </div>
+            <form id="propertyForm">
+                <input type="hidden" id="propertyId">
+                
+                <div class="form-group">
+                    <label>الصور (حتى 5 صور)</label>
+                    <input type="file" id="propertyImages" accept="image/*" multiple>
+                    <div id="imagePreview" class="image-preview-grid"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>نوع العقار</label>
+                    <select id="propertyType" required>
+                        <option value="">اختر النوع</option>
+                        <option value="عمارة">عمارة</option>
+                        <option value="فيلا">فيلا</option>
+                        <option value="شقة">شقة</option>
+                        <option value="أرض">أرض</option>
+                        <option value="استراحة">استراحة</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>عنوان العرض</label>
+                    <input type="text" id="propertyTitle" required>
+                </div>
+
+                <div class="form-group">
+                    <label>السعر (ريال)</label>
+                    <input type="number" id="propertyPrice" required>
+                </div>
+
+                <div class="form-group">
+                    <label>المنطقة</label>
+                    <select id="propertyRegion" required>
+                        <option value="">اختر المنطقة</option>
+                        <option value="شمال الطائف">شمال الطائف</option>
+                        <option value="جنوب الطائف">جنوب الطائف</option>
+                        <option value="شرق الطائف">شرق الطائف</option>
+                        <option value="غرب الطائف">غرب الطائف</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>الحي</label>
+                    <input type="text" id="propertyNeighborhood" required>
+                </div>
+
+                <div class="form-group">
+                    <label>المساحة (م²)</label>
+                    <input type="number" id="propertyArea" required>
+                </div>
+
+                <div class="form-group">
+                    <label>هل يوجد صك؟</label>
+                    <select id="propertyDeed" required onchange="toggleBankField()">
+                        <option value="">اختر</option>
+                        <option value="نعم">نعم</option>
+                        <option value="لا">لا</option>
+                    </select>
+                </div>
+
+                <div class="form-group hidden" id="bankFieldGroup">
+                    <label>هل يقبل البنك؟</label>
+                    <select id="propertyBank">
+                        <option value="">اختر</option>
+                        <option value="نعم">نعم</option>
+                        <option value="لا">لا</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>الوصف</label>
+                    <textarea id="propertyDescription" required></textarea>
+                </div>
+
+                <div class="action-buttons">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-save"></i> حفظ العقار
+                    </button>
+                    <button type="button" class="btn" onclick="closePropertyModal()" style="background: var(--text-light); color: white;">
+                        إلغاء
+                    </button>
+                </div>
+            </form>
         </div>
-      </aside>
-    </section>
-
-    <!-- main grid -->
-    <section class="grid">
-      <section>
-        <div id="cards" class="cards" aria-live="polite"></div>
-      </section>
-
-      <aside class="sidebar">
-        <div style="display:flex;flex-direction:column;gap:12px">
-          <div>
-            <h4 style="margin:0 0 6px 0">الإحصائيات</h4>
-            <div class="stat-row">
-              <div><div style="font-weight:800" id="stat-props">0</div><div class="meta">إجمالي العقارات</div></div>
-              <div><div style="font-weight:800" id="stat-brokers">0</div><div class="meta">إجمالي الوسطاء</div></div>
-            </div>
-          </div>
-
-          <div>
-            <h4 style="margin:0 0 6px 0">إدارة سريعة</h4>
-            <button class="btn small" id="open-admin">لوحة المدير</button>
-            <button class="btn small ghost" id="open-broker">لوحة الوسيط</button>
-          </div>
-
-          <div>
-            <h4 style="margin:0 0 6px 0">أقسام سريعة</h4>
-            <div style="display:flex;flex-direction:column;gap:8px">
-              <div class="cat" data-type="فيلا">🏡 فيلا</div>
-              <div class="cat" data-type="شقة">🏘 شقة</div>
-              <div class="cat" data-type="أرض">🟩 أرض</div>
-            </div>
-          </div>
-        </div>
-      </aside>
-    </section>
-  </main>
-
-  <!-- MODAL: Login / Admin / Broker / Forms -->
-  <div class="modal-back" id="modal-back">
-    <div class="modal" id="modal">
-      <!-- content injected by JS -->
     </div>
-  </div>
 
-  <footer style="text-align:center;color:var(--muted);margin:28px 0">© النخبة العقارية</footer>
-
-  <!-- Firebase SDK (compat) -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
-
-  <script>
-  /**************************************************************************
-   * النخبة العقارية — Single-file app
-   * - واجهة عامة لعرض العقارات
-   * - لوحة مدير واجهة رسومية كاملة (إضافة/تعديل/حذف وسطاء وعقارات)
-   * - لوحة وسيط لإدارة عقاراته وملفه الشخصي
-   * - رفع صور إلى Firebase Storage، بيانات محفوظة في Firestore
-   * - منطق واتساب: عقارات المدير -> مدير (0535342404)، عقارات الوسيط -> رقم الوسيط المسجل
-   *
-   * ملاحظة أمان: هذا مثال جاهز للتشغيل. قبل الإنتاج:
-   * - نفّذ Firebase Auth + قواعد Firestore/Storage مناسبة
-   * - لا تخزن كلمات المرور نصاً عاديًا في الإنتاج (هنا للسهولة والتجربة)
-   **************************************************************************/
-
-  // ---------- Firebase config (provided) ----------
-  const firebaseConfig = {
-    apiKey: "AIzaSyApEkbNuWz1nd0DSwt4lirlVlUSt3GNB0Y",
-    authDomain: "alnokhbu.firebaseapp.com",
-    projectId: "alnokhbu",
-    storageBucket: "alnokhbu.firebasestorage.app",
-    messagingSenderId: "647865484582",
-    appId: "1:647865484582:web:162d57ee1dfab160c9ede7",
-    measurementId: "G-GMZB6BG3LY"
-  };
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-  const storage = firebase.storage();
-
-  // ---------- App state ----------
-  let managerWhats = '0535342404';
-  let currentUser = null; // {id, username, role: 'admin'|'broker', whatsapp, active}
-  let modalBack = document.getElementById('modal-back');
-  let modal = document.getElementById('modal');
-
-  // ---------- utils ----------
-  const $ = (s) => document.querySelector(s);
-  const $$ = (s) => Array.from(document.querySelectorAll(s));
-  const esc = s => (s||'').toString().replace(/[&<>\"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const fmt = n => (n||'').toString().replace(/(\\d)(?=(\\d{3})+$)/g,'$1,');
-  const normPhone = n => (n||'').toString().replace(/[^0-9]/g,'');
-
-  // ---------- UI wiring ----------
-  document.getElementById('btn-open-login').addEventListener('click', openLoginModal);
-  document.getElementById('btn-home').addEventListener('click', ()=>{ hideModal(); loadCards(); $('#detail-view') && ($('#detail-view').style.display='none'); });
-  document.getElementById('open-admin').addEventListener('click', openLoginModal);
-  document.getElementById('open-broker').addEventListener('click', openLoginModal);
-  document.getElementById('btn-search').addEventListener('click', ()=> loadCards({q:$('#q').value, type:$('#filter-type').value, region:$('#filter-region').value}));
-  $$('.cat').forEach(c=>c.addEventListener('click', e => { $('#filter-type').value = e.currentTarget.dataset.type; loadCards({type: e.currentTarget.dataset.type}); }));
-  document.getElementById('not-found').addEventListener('click', ()=> {
-    const msg = 'مرحباً، بحثت في موقع النخبة العقارية ولم أجد العقار الذي أبحث عنه.';
-    window.open(`https://wa.me/${normPhone(managerWhats)}?text=${encodeURIComponent(msg)}`, '_blank');
-  });
-
-  // ---------- modal helpers ----------
-  function showModal(contentHtml){
-    modal.innerHTML = contentHtml;
-    modalBack.style.display = 'flex';
-  }
-  function hideModal(){ modalBack.style.display = 'none'; modal.innerHTML = ''; }
-
-  modalBack.addEventListener('click', (e) => { if(e.target === modalBack) hideModal(); });
-
-  // ---------- Defaults on first run ----------
-  async function ensureDefaults(){
-    // settings
-    const setRef = db.collection('settings').doc('site');
-    const setSnap = await setRef.get();
-    if(!setSnap.exists){
-      await setRef.set({managerWhats:'0535342404', logo:'', createdAt: firebase.firestore.FieldValue.serverTimestamp()});
-      managerWhats = '0535342404';
-    } else {
-      const data = setSnap.data();
-      managerWhats = data.managerWhats || managerWhats;
-      if(data.logo) $('#logo-preview').src = data.logo;
-    }
-    $('#manager-number').innerText = managerWhats;
-
-    // default admin user
-    const q = await db.collection('users').where('username','==','IVL511').get();
-    if(q.empty){
-      await db.collection('users').add({username:'IVL511', password:'IVL511', role:'admin', active:true, whatsapp: managerWhats, createdAt: firebase.firestore.FieldValue.serverTimestamp()});
-    }
-
-    // if no props, add sample
-    const propsSnap = await db.collection('props').limit(1).get();
-    if(propsSnap.empty){
-      await db.collection('props').add({
-        type:'فيلا', title:'فيلا فاخرة للبيع', price:'1500000', area:'500',
-        region:'شمال الطائف', neighborhood:'الحوية', sak:true, bankAccepted:true, desc:'فيلا فاخرة بمواصفات عالية في موقع مميز.',
-        images:[], ownerRole:'admin', ownerId:null, createdAt: firebase.firestore.FieldValue.serverTimestamp(), views:0
-      });
-    }
-  }
-
-  // ---------- Render public cards ----------
-  async function loadCards(filter = {}){
-    const snap = await db.collection('props').orderBy('createdAt','desc').get();
-    const all = []; snap.forEach(d=> all.push({id:d.id, ...d.data()}));
-    const qtext = (filter.q||'').toString().toLowerCase();
-    const filtered = all.filter(p=>{
-      if(filter.type && filter.type !== p.type) return false;
-      if(filter.region && filter.region !== p.region) return false;
-      if(qtext && !((p.title||'').toLowerCase().includes(qtext) || (p.neighborhood||'').toLowerCase().includes(qtext) || (p.desc||'').toLowerCase().includes(qtext))) return false;
-      return true;
-    });
-
-    $('#cards').innerHTML = '';
-    if(!filtered.length){ $('#cards').innerHTML = '<div style="padding:18px;background:#fff;border-radius:12px">لا توجد عروض حالياً</div>'; return; }
-
-    filtered.forEach(p=>{
-      const img = (p.images && p.images.length) ? p.images[0] : '';
-      const div = document.createElement('div'); div.className = 'card';
-      div.innerHTML = `
-        <div class="thumb">${ img ? `<img src="${esc(img)}" alt="${esc(p.title)}">` : '<div style="padding:14px;color:var(--muted)">لا توجد صورة</div>' }</div>
-        <div class="card-body">
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <div>
-              <div class="price">${fmt(p.price)} ر.س</div>
-              <div style="font-weight:800">${esc(p.title)}</div>
+    <div id="brokerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>إضافة وسيط جديد</h3>
+                <button class="close-modal" onclick="closeBrokerModal()">&times;</button>
             </div>
-            <div style="text-align:left">
-              <div class="meta">${esc(p.region)}</div>
-              <div class="meta">${esc(p.area)} م²</div>
+            <form id="brokerForm">
+                <div class="form-group">
+                    <label>اسم المستخدم</label>
+                    <input type="text" id="brokerUsername" required>
+                </div>
+                <div class="form-group">
+                    <label>كلمة المرور</label>
+                    <input type="password" id="brokerPassword" required>
+                </div>
+                <div class="form-group">
+                    <label>رقم واتساب (بالصيغة الدولية)</label>
+                    <input type="text" id="brokerWhatsappNumber" placeholder="966500000000">
+                </div>
+                <div class="action-buttons">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-user-plus"></i> إضافة الوسيط
+                    </button>
+                    <button type="button" class="btn" onclick="closeBrokerModal()" style="background: var(--text-light); color: white;">
+                        إلغاء
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-content" style="max-width: 450px;">
+            <div class="modal-header">
+                <h3>تسجيل الدخول</h3>
+                <button class="close-modal" onclick="closeLoginModal()">&times;</button>
             </div>
-          </div>
-          <div class="meta">${esc(p.neighborhood) || ''}</div>
-        </div>
-        <div class="card-actions">
-          <button class="btn small detail-btn" data-id="${p.id}">عرض التفاصيل</button>
-          <button class="btn small ghost contact-btn" data-id="${p.id}">واتساب</button>
-        </div>`;
-      $('#cards').appendChild(div);
-    });
-
-    // events
-    $$('.detail-btn').forEach(b => b.addEventListener('click', e => showDetail(e.currentTarget.dataset.id)));
-    $$('.contact-btn').forEach(b => b.addEventListener('click', e => contactFromCard(e.currentTarget.dataset.id)));
-
-    // stats:
-    const statsP = await db.collection('props').get(); $('#stat-props').innerText = statsP.size;
-    const statsB = await db.collection('users').where('role','==','broker').get(); $('#stat-brokers').innerText = statsB.size;
-  }
-
-  // ---------- Detail view ----------
-  async function showDetail(id){
-    const doc = await db.collection('props').doc(id).get();
-    if(!doc.exists) return alert('العرض غير موجود');
-    const p = {id: doc.id, ...doc.data()};
-    // increment views
-    await db.collection('props').doc(id).update({views: (p.views||0)+1});
-    // render in modal
-    let imagesHtml = '';
-    (p.images || []).forEach(u => imagesHtml += `<img src="${esc(u)}" style="height:160px;border-radius:10px;margin-right:8px">`);
-    const content = `
-      <h3 style="margin-top:0">${esc(p.title)}</h3>
-      <div style="display:flex;gap:12px;align-items:center;justify-content:space-between">
-        <div><div class="price">${fmt(p.price)} ر.س</div><div class="meta">${esc(p.region)} — ${esc(p.neighborhood)}</div></div>
-        <div style="text-align:left"><div class="meta">المساحة</div><div style="font-weight:800">${esc(p.area)} م²</div></div>
-      </div>
-      <div style="margin-top:12px">${imagesHtml || '<div style="padding:14px;background:#f1f7ff;border-radius:10px">لا توجد صور</div>'}</div>
-      <p style="margin-top:12px;color:#263248">${esc(p.desc)}</p>
-      <table style="width:100%;margin-top:8px"><tbody>
-        <tr><th style="text-align:right;padding:8px">الصك</th><td>${p.sak? 'نعم':'لا'}</td></tr>
-        <tr><th style="text-align:right;padding:8px">يقبل بنك</th><td>${p.bankAccepted? 'نعم':'لا'}</td></tr>
-        <tr><th style="text-align:right;padding:8px">معروض بواسطة</th><td>${p.ownerRole === 'broker' ? 'وسيط' : 'مدير'}</td></tr>
-      </tbody></table>
-      <div style="display:flex;gap:10px;margin-top:12px">
-        <button class="btn" id="modal-contact">التواصل عبر واتساب</button>
-        <button class="btn ghost" id="modal-close">إغلاق</button>
-      </div>`;
-    showModal(content);
-    $('#modal-contact').addEventListener('click', ()=> {
-      contactFromData(p);
-    });
-    $('#modal-close').addEventListener('click', hideModal);
-  }
-
-  // ---------- WhatsApp contact logic ----------
-  async function contactFromCard(id){
-    const doc = await db.collection('props').doc(id).get(); if(!doc.exists) return alert('العرض غير موجود');
-    const p = {id: doc.id, ...doc.data()};
-    contactFromData(p);
-  }
-  async function contactFromData(p){
-    let target = managerWhats;
-    if(p.ownerRole === 'broker' && p.ownerId){
-      const bdoc = await db.collection('users').doc(p.ownerId).get();
-      if(bdoc.exists){ const b = bdoc.data(); if(b.whatsapp) target = b.whatsapp; }
-    }
-    const msg = `مرحباً، أرغب بالاستفسار عن العقار المعروض لديكم في موقع (النخبة العقارية):%0Aالعرض: ${encodeURIComponent(p.title)}%0Aالسعر: ${encodeURIComponent(p.price)} ريال%0Aالمساحة: ${encodeURIComponent(p.area)} م²%0Aالرابط: ${encodeURIComponent(location.href)}%0Aهل العقار لازال متاحاً؟`;
-    window.open(`https://wa.me/${normPhone(target)}?text=${msg}`, '_blank');
-  }
-
-  // ---------- Login Modal & Auth (simple using users collection) ----------
-  function openLoginModal(){
-    const html = `
-      <h3 style="margin-top:0">تسجيل الدخول</h3>
-      <div style="display:flex;gap:12px">
-        <div style="flex:1">
-          <label>اسم المستخدم</label>
-          <input id="login-username" placeholder="اسم المستخدم (مثال IVL511)"/>
-          <label style="margin-top:8px">كلمة المرور</label>
-          <input id="login-password" type="password" placeholder="كلمة المرور"/>
-          <div style="margin-top:12px;display:flex;gap:8px">
-            <button class="btn" id="do-login">دخول</button>
-            <button class="btn ghost" id="cancel-login">إلغاء</button>
-          </div>
-          <div id="login-msg" style="color:var(--danger);margin-top:8px"></div>
-          <div style="margin-top:8px;color:var(--muted);font-size:13px">يوزر افتراضي: <b>IVL511</b> / كلمة: <b>IVL511</b></div>
-        </div>
-        <div style="width:280px">
-          <div style="background:#f6f9ff;padding:12px;border-radius:10px">
-            <h4 style="margin:0 0 6px 0">لماذا الدخول؟</h4>
-            <p style="margin:0;color:var(--muted)">لوحة المدير تتيح إضافة/تعديل/حذف الوسطاء والعقارات. الوسيط يدير عقاراته فقط.</p>
-          </div>
-        </div>
-      </div>`;
-    showModal(html);
-    $('#do-login').addEventListener('click', async ()=>{
-      const u = $('#login-username').value.trim();
-      const p = $('#login-password').value.trim();
-      if(!u || !p){ $('#login-msg').innerText = 'الرجاء ملء الحقول'; return; }
-      const q = await db.collection('users').where('username','==',u).where('password','==',p).where('active','==',true).get();
-      if(q.empty){ $('#login-msg').innerText = 'بيانات غير صحيحة أو الحساب موقوف'; return; }
-      const doc = q.docs[0]; currentUser = {id: doc.id, ...doc.data()};
-      hideModal();
-      if(currentUser.role === 'admin') openAdminUI();
-      else openBrokerUI();
-    });
-    $('#cancel-login').addEventListener('click', hideModal);
-  }
-
-  // ---------- Admin UI (full GUI inside modal) ----------
-  async function openAdminUI(){
-    // load data
-    const propsSnap = await db.collection('props').orderBy('createdAt','desc').get();
-    const props = []; propsSnap.forEach(d => props.push({id:d.id,...d.data()}));
-    const brokersSnap = await db.collection('users').where('role','==','broker').get();
-    const brokers = []; brokersSnap.forEach(d => brokers.push({id:d.id,...d.data()}));
-    const content = `
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <h3 style="margin:0">لوحة المدير — ${esc(currentUser.username)}</h3>
-        <div><button class="btn ghost" id="admin-logout">تسجيل خروج</button></div>
-      </div>
-      <div style="margin-top:12px;display:grid;grid-template-columns:1fr 380px;gap:12px">
-        <div>
-          <div style="background:#fff;padding:12px;border-radius:12px"><h4 style="margin:0 0 8px 0">إدارة العقارات</h4>
-            <table class="table" style="width:100%"><thead><tr><th>العنوان</th><th>المنطقة</th><th>السعر</th><th>المالك</th><th>أفعال</th></tr></thead><tbody id="admin-props-rows">${props.map(p=>`<tr data-id="${p.id}"><td>${esc(p.title)}</td><td>${esc(p.region)} - ${esc(p.neighborhood)}</td><td>${fmt(p.price)}</td><td>${p.ownerRole}</td><td><button class="btn small admin-edit-prop" data-id="${p.id}">تعديل</button> <button class="btn small ghost admin-del-prop" data-id="${p.id}">حذف</button></td></tr>`).join('')}</tbody></table>
-            <div style="margin-top:8px"><button class="btn" id="admin-add-prop">إضافة عقار جديد</button></div>
-          </div>
-        </div>
-
-        <aside>
-          <div style="background:#fff;padding:12px;border-radius:12px">
-            <h4 style="margin:0 0 8px 0">إدارة الوسطاء</h4>
-            <div style="margin-bottom:8px"><button class="btn" id="admin-new-broker">إضافة وسيط</button></div>
-            <table class="table"><thead><tr><th>الوسيط</th><th>واتساب</th><th>الحالة</th><th>أفعال</th></tr></thead><tbody id="admin-brokers-rows">${brokers.map(b=>`<tr data-id="${b.id}"><td>${esc(b.username)}</td><td>${esc(b.whatsapp||'-')}</td><td>${b.active? 'مفعل':'موقوف'}</td><td><button class="btn small admin-toggle-broker" data-id="${b.id}">${b.active? 'إيقاف':'تفعيل'}</button> <button class="btn small ghost admin-edit-broker" data-id="${b.id}">تعديل</button></td></tr>`).join('')}</tbody></table>
-            <hr style="margin:12px 0;border:none;border-top:1px dashed #eef4ff">
-            <h5 style="margin:0 0 8px 0">إعدادات الموقع</h5>
-            <div style="display:flex;flex-direction:column;gap:8px">
-              <label>رقم واتساب المدير</label>
-              <input id="admin-manager-whats" value="${esc(managerWhats)}"/>
-              <label>شعار الموقع</label>
-              <input type="file" id="admin-logo-file"/>
-              <div style="display:flex;gap:8px"><button class="btn" id="save-settings">حفظ</button> <button class="btn ghost" id="close-admin">إغلاق</button></div>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <i class="fas fa-building" style="font-size: 48px; color: var(--primary-color);"></i>
             </div>
-          </div>
-        </aside>
-      </div>
-    `;
-    showModal(content);
-
-    // attach handlers
-    document.getElementById('admin-logout').addEventListener('click', ()=>{ currentUser = null; hideModal(); alert('تم تسجيل الخروج'); });
-    document.getElementById('close-admin').addEventListener('click', hideModal);
-
-    // add prop
-    document.getElementById('admin-add-prop').addEventListener('click', ()=> openPropForm('create', null));
-
-    // edit / delete props
-    $$('.admin-edit-prop').forEach(btn => btn.addEventListener('click', e => openPropForm('edit', e.currentTarget.dataset.id)));
-    $$('.admin-del-prop').forEach(btn => btn.addEventListener('click', async e => {
-      const id = e.currentTarget.dataset.id;
-      if(!confirm('هل تريد حذف هذا العقار؟')) return;
-      await db.collection('props').doc(id).delete();
-      alert('تم الحذف');
-      openAdminUI();
-      loadCards();
-    }));
-
-    // brokers actions
-    document.getElementById('admin-new-broker').addEventListener('click', ()=> openBrokerForm('create', null));
-    $$('.admin-toggle-broker').forEach(btn => btn.addEventListener('click', async e => {
-      const id = e.currentTarget.dataset.id;
-      const ref = db.collection('users').doc(id);
-      const snap = await ref.get(); if(!snap.exists) return;
-      await ref.update({active: !snap.data().active});
-      alert('تم التحديث');
-      openAdminUI();
-    }));
-    $$('.admin-edit-broker').forEach(btn => btn.addEventListener('click', e => openBrokerForm('edit', e.currentTarget.dataset.id)));
-
-    // settings save
-    document.getElementById('save-settings').addEventListener('click', async ()=>{
-      const newNum = $('#admin-manager-whats').value.trim();
-      const file = $('#admin-logo-file').files[0];
-      const ref = db.collection('settings').doc('site');
-      let logoUrl = null;
-      if(file){
-        const path = `logos/${Date.now()}_${file.name}`;
-        const snap = await storage.ref(path).put(file);
-        logoUrl = await snap.ref.getDownloadURL();
-      }
-      const payload = {};
-      if(newNum) payload.managerWhats = newNum;
-      if(logoUrl) payload.logo = logoUrl;
-      await ref.set(payload, {merge:true});
-      managerWhats = newNum || managerWhats;
-      if(logoUrl) $('#logo-preview').src = logoUrl;
-      $('#manager-number').innerText = managerWhats;
-      alert('تم حفظ الإعدادات');
-      openAdminUI();
-    });
-  }
-
-  // ---------- Admin: Prop form (create/edit) ----------
-  async function openPropForm(mode='create', propId=null){
-    let prop = {};
-    if(mode === 'edit' && propId){
-      const snap = await db.collection('props').doc(propId).get(); if(!snap.exists) return alert('غير موجود'); prop = snap.data();
-    }
-    const content = `
-      <h3 style="margin-top:0">${mode === 'create' ? 'إنشاء عقار جديد' : 'تعديل عقار'}</h3>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-        <div>
-          <label>التصنيف</label>
-          <select id="prop-type">${['عمارة','فيلا','شقة','أرض','استراحة'].map(t=>`<option ${prop.type===t? 'selected':''}>${t}</option>`).join('')}</select>
-          <label>عنوان العرض</label><input id="prop-title" value="${esc(prop.title||'')}" />
-          <label>السعر (أرقام إنجليزية فقط)</label><input id="prop-price" value="${esc(prop.price||'')}" />
-          <label>المساحة (م²)</label><input id="prop-area" value="${esc(prop.area||'')}" />
+            <div id="loginAlert"></div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>اسم المستخدم</label>
+                    <input type="text" id="loginUsername" required>
+                </div>
+                <div class="form-group">
+                    <label>كلمة المرور</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-sign-in-alt"></i>
+                    تسجيل الدخول
+                </button>
+            </form>
         </div>
-        <div>
-          <label>المنطقة</label>
-          <select id="prop-region"><option ${prop.region==='شمال الطائف'?'selected':''}>شمال الطائف</option><option ${prop.region==='جنوب الطائف'?'selected':''}>جنوب الطائف</option><option ${prop.region==='شرق الطائف'?'selected':''}>شرق الطائف</option><option ${prop.region==='غرب الطائف'?'selected':''}>غرب الطائف</option></select>
-          <label>الحي/المنطقة</label><input id="prop-neighborhood" value="${esc(prop.neighborhood||'')}" />
-          <label>الصور (أقصى 5)</label><input type="file" id="prop-images" multiple accept="image/*" />
-          <div class="images-preview" id="prop-images-preview">${(prop.images||[]).map(u=>`<div class="img-thumb"><img src="${esc(u)}"/></div>`).join('')}</div>
-        </div>
-      </div>
-      <div style="margin-top:8px">
-        <label>هل يوجد صك؟</label>
-        <select id="prop-sak"><option value="yes" ${prop.sak? 'selected':''}>نعم</option><option value="no" ${!prop.sak? 'selected':''}>لا</option></select>
-        <label style="margin-top:8px">هل يقبل البنك؟</label>
-        <select id="prop-bank"><option ${prop.bankAccepted? 'selected':''}>نعم</option><option ${!prop.bankAccepted? 'selected':''}>لا</option></select>
-        <label style="margin-top:8px">الوصف</label>
-        <textarea id="prop-desc" rows="4">${esc(prop.desc||'')}</textarea>
-      </div>
-      <div style="display:flex;gap:8px;margin-top:12px">
-        <button class="btn" id="save-prop">${mode === 'create' ? 'نشر العقار' : 'حفظ التعديل'}</button>
-        <button class="btn ghost" id="cancel-prop">إلغاء</button>
-      </div>
-    `;
-    showModal(content);
+    </div>
 
-    // preview images on select
-    $('#prop-images').addEventListener('change', (e)=>{
-      const files = Array.from(e.target.files).slice(0,5);
-      const preview = $('#prop-images-preview'); preview.innerHTML = '';
-      files.forEach(f=>{
-        const url = URL.createObjectURL(f);
-        const el = document.createElement('div'); el.className = 'img-thumb'; el.innerHTML = `<img src="${url}">`;
-        preview.appendChild(el);
-      });
-    });
+    <script>
+        const DB = {
+            users: 'eliteRealEstate_users',
+            properties: 'eliteRealEstate_properties',
+            settings: 'eliteRealEstate_settings',
+            session: 'eliteRealEstate_session'
+        };
 
-    $('#cancel-prop').addEventListener('click', hideModal);
+        function initializeApp() {
+            if (!localStorage.getItem(DB.users)) {
+                const defaultAdmin = {
+                    id: generateId(),
+                    username: 'admin',
+                    password: hashPassword('admin123'),
+                    role: 'admin',
+                    isActive: true,
+                    whatsappNumber: '966535342404'
+                };
+                localStorage.setItem(DB.users, JSON.stringify([defaultAdmin]));
+            }
 
-    $('#save-prop').addEventListener('click', async ()=>{
-      const payload = {
-        type: $('#prop-type').value,
-        title: $('#prop-title').value.trim(),
-        price: $('#prop-price').value.trim(),
-        area: $('#prop-area').value.trim(),
-        region: $('#prop-region').value,
-        neighborhood: $('#prop-neighborhood').value.trim(),
-        sak: $('#prop-sak').value === 'yes',
-        bankAccepted: $('#prop-bank').value === 'نعم',
-        desc: $('#prop-desc').value.trim(),
-        ownerRole: 'admin',
-        ownerId: currentUser.id,
-        views: 0,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      };
-      // upload images then set doc
-      const files = Array.from($('#prop-images').files).slice(0,5);
-      if(files.length){
-        const uploaded = [];
-        for(let i=0;i<files.length;i++){
-          const file = files[i];
-          const path = `props/${Date.now()}_${file.name}`;
-          const snap = await storage.ref(path).put(file);
-          const url = await snap.ref.getDownloadURL();
-          uploaded.push(url);
+            if (!localStorage.getItem(DB.properties)) {
+                localStorage.setItem(DB.properties, JSON.stringify([]));
+            }
+
+            if (!localStorage.getItem(DB.settings)) {
+                localStorage.setItem(DB.settings, JSON.stringify({
+                    adminWhatsapp: '966535342404'
+                }));
+            }
+
+            checkSession();
         }
-        payload.images = uploaded;
-      } else if(mode === 'edit' && (prop.images||[]).length) {
-        payload.images = prop.images;
-      } else {
-        payload.images = [];
-      }
 
-      if(mode === 'create'){
-        await db.collection('props').add(payload);
-        alert('تم نشر العقار');
-      } else {
-        await db.collection('props').doc(propId).update(payload);
-        alert('تم حفظ التعديلات');
-      }
-      hideModal(); openAdminUI(); loadCards();
-    });
-  }
-
-  // ---------- Admin: Broker form (create/edit) ----------
-  async function openBrokerForm(mode='create', brokerId=null){
-    let broker = {};
-    if(mode === 'edit' && brokerId){
-      const snap = await db.collection('users').doc(brokerId).get(); if(!snap.exists) return alert('غير موجود'); broker = snap.data();
-    }
-    const content = `
-      <h3 style="margin-top:0">${mode === 'create' ? 'إنشاء حساب وسيط' : 'تعديل حساب وسيط'}</h3>
-      <label>اسم المستخدم</label><input id="broker-username" value="${esc(broker.username||'')}" />
-      <label style="margin-top:6px">كلمة المرور</label><input id="broker-password" value="${esc(broker.password||'')}" />
-      <label style="margin-top:6px">رقم واتساب</label><input id="broker-whatsapp" value="${esc(broker.whatsapp||'')}" />
-      <div style="display:flex;gap:8px;margin-top:12px">
-        <button class="btn" id="save-broker">${mode === 'create' ? 'إنشاء' : 'حفظ'}</button>
-        <button class="btn ghost" id="cancel-broker">إلغاء</button>
-      </div>
-    `;
-    showModal(content);
-
-    $('#cancel-broker').addEventListener('click', hideModal);
-    $('#save-broker').addEventListener('click', async ()=>{
-      const u = $('#broker-username').value.trim(); const p = $('#broker-password').value.trim(); const w = $('#broker-whatsapp').value.trim();
-      if(!u || !p){ alert('ادخل اسم مستخدم وكلمة مرور'); return; }
-      if(mode === 'create'){
-        await db.collection('users').add({username:u, password:p, role:'broker', active:true, whatsapp:w, createdAt: firebase.firestore.FieldValue.serverTimestamp()});
-        alert('تم إنشاء الوسيط');
-      } else {
-        await db.collection('users').doc(brokerId).update({username:u,password:p,whatsapp:w});
-        alert('تم التحديث');
-      }
-      hideModal(); openAdminUI();
-    });
-  }
-
-  // ---------- Broker UI ----------
-  async function openBrokerUI(){
-    const propsSnap = await db.collection('props').where('ownerId','==', currentUser.id).orderBy('createdAt','desc').get();
-    const props = []; propsSnap.forEach(d=> props.push({id:d.id,...d.data()}));
-    const content = `
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <h3 style="margin:0">لوحة الوسيط — ${esc(currentUser.username)}</h3>
-        <div><button class="btn ghost" id="broker-logout">تسجيل خروج</button></div>
-      </div>
-      <div style="margin-top:12px;display:grid;grid-template-columns:1fr 320px;gap:12px">
-        <div>
-          <div style="background:#fff;padding:12px;border-radius:12px">
-            <h4 style="margin:0 0 8px 0">عقاراتي</h4>
-            <div style="margin-bottom:8px"><button class="btn" id="broker-add-prop">إضافة عقار</button></div>
-            <table class="table"><thead><tr><th>العنوان</th><th>المنطقة</th><th>السعر</th><th>أفعال</th></tr></thead><tbody>${props.map(p=>`<tr data-id="${p.id}"><td>${esc(p.title)}</td><td>${esc(p.region)}</td><td>${fmt(p.price)}</td><td><button class="btn small broker-edit" data-id="${p.id}">تعديل</button> <button class="btn small ghost broker-del" data-id="${p.id}">حذف</button></td></tr>`).join('')}</tbody></table>
-          </div>
-        </div>
-        <aside>
-          <div style="background:#fff;padding:12px;border-radius:12px">
-            <h4 style="margin:0 0 8px 0">الملف الشخصي</h4>
-            <div>اسم المستخدم: <b>${esc(currentUser.username)}</b></div>
-            <div style="margin-top:8px"><label>رقم واتساب</label><input id="broker-ws" value="${esc(currentUser.whatsapp||'')}" /></div>
-            <div style="margin-top:12px;display:flex;gap:8px">
-              <button class="btn" id="save-broker-ws">حفظ</button>
-              <button class="btn ghost" id="close-broker">إغلاق</button>
-            </div>
-          </div>
-        </aside>
-      </div>
-    `;
-    showModal(content);
-    $('#broker-logout').addEventListener('click', ()=>{ currentUser = null; hideModal(); alert('تم تسجيل الخروج'); });
-    $('#close-broker').addEventListener('click', hideModal);
-    $('#save-broker-ws').addEventListener('click', async ()=>{ const w = $('#broker-ws').value.trim(); await db.collection('users').doc(currentUser.id).update({whatsapp:w}); currentUser.whatsapp = w; alert('تم حفظ رقم الواتساب'); openBrokerUI(); });
-
-    // add prop
-    $('#broker-add-prop').addEventListener('click', ()=> openBrokerAddPropForm());
-
-    // edit/delete
-    $$('.broker-edit').forEach(btn => btn.addEventListener('click', e => openBrokerEditPropForm(e.currentTarget.dataset.id)));
-    $$('.broker-del').forEach(btn => btn.addEventListener('click', async e => {
-      const id = e.currentTarget.dataset.id;
-      if(!confirm('هل تريد حذف هذا العقار؟')) return;
-      await db.collection('props').doc(id).delete();
-      alert('تم الحذف'); openBrokerUI(); loadCards();
-    }));
-  }
-
-  async function openBrokerAddPropForm(){
-    const content = `
-      <h3 style="margin-top:0">إضافة عقار جديد</h3>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-        <div>
-          <label>التصنيف</label><select id="b-prop-type"><option>فيلا</option><option>شقة</option><option>عمارة</option><option>أرض</option><option>استراحة</option></select>
-          <label>عنوان العرض</label><input id="b-prop-title" />
-          <label>السعر</label><input id="b-prop-price" />
-          <label>المساحة</label><input id="b-prop-area" />
-        </div>
-        <div>
-          <label>المنطقة</label><select id="b-prop-region"><option>شمال الطائف</option><option>جنوب الطائف</option><option>شرق الطائف</option><option>غرب الطائف</option></select>
-          <label>الحي/المنطقة</label><input id="b-prop-neigh" />
-          <label>الصور (أقصى 5)</label><input type="file" id="b-prop-images" multiple accept="image/*" />
-          <div class="images-preview" id="b-prop-preview"></div>
-        </div>
-      </div>
-      <div style="margin-top:8px"><label>الصك</label><select id="b-prop-sak"><option value="yes">نعم</option><option value="no">لا</option></select></div>
-      <div style="margin-top:8px"><label>الوصف</label><textarea id="b-prop-desc" rows="4"></textarea></div>
-      <div style="display:flex;gap:8px;margin-top:12px"><button class="btn" id="b-save-prop">نشر</button><button class="btn ghost" id="b-cancel">إلغاء</button></div>
-    `;
-    showModal(content);
-    $('#b-prop-preview').innerHTML = '';
-    $('#b-prop-images').addEventListener('change', (e)=>{
-      const files = Array.from(e.target.files).slice(0,5);
-      const preview = $('#b-prop-preview'); preview.innerHTML = '';
-      files.forEach(f=>{ const url = URL.createObjectURL(f); const el = document.createElement('div'); el.className='img-thumb'; el.innerHTML = `<img src="${url}">`; preview.appendChild(el); });
-    });
-    $('#b-cancel').addEventListener('click', hideModal);
-    $('#b-save-prop').addEventListener('click', async ()=>{
-      const payload = {
-        type: $('#b-prop-type').value,
-        title: $('#b-prop-title').value.trim(),
-        price: $('#b-prop-price').value.trim(),
-        area: $('#b-prop-area').value.trim(),
-        region: $('#b-prop-region').value,
-        neighborhood: $('#b-prop-neigh').value.trim(),
-        sak: $('#b-prop-sak').value === 'yes',
-        bankAccepted: false,
-        desc: $('#b-prop-desc').value.trim(),
-        ownerRole: 'broker', ownerId: currentUser.id,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(), views:0
-      };
-      const files = Array.from($('#b-prop-images').files).slice(0,5);
-      const uploaded = [];
-      for(let f of files){
-        const path = `props/${Date.now()}_${f.name}`;
-        const snap = await storage.ref(path).put(f);
-        const url = await snap.ref.getDownloadURL();
-        uploaded.push(url);
-      }
-      payload.images = uploaded;
-      await db.collection('props').add(payload);
-      alert('تم النشر'); hideModal(); openBrokerUI(); loadCards();
-    });
-  }
-
-  async function openBrokerEditPropForm(propId){
-    const doc = await db.collection('props').doc(propId).get(); if(!doc.exists) return alert('غير موجود'); const p = doc.data();
-    const content = `
-      <h3 style="margin-top:0">تعديل عقار</h3>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-        <div>
-          <label>التصنيف</label><select id="eb-prop-type">${['عمارة','فيلا','شقة','أرض','استراحة'].map(t=>`<option ${p.type===t? 'selected':''}>${t}</option>`).join('')}</select>
-          <label>عنوان العرض</label><input id="eb-prop-title" value="${esc(p.title||'')}" />
-          <label>السعر</label><input id="eb-prop-price" value="${esc(p.price||'')}" />
-          <label>المساحة</label><input id="eb-prop-area" value="${esc(p.area||'')}" />
-        </div>
-        <div>
-          <label>المنطقة</label><select id="eb-prop-region"><option ${p.region==='شمال الطائف'?'selected':''}>شمال الطائف</option><option ${p.region==='جنوب الطائف'?'selected':''}>جنوب الطائف</option><option ${p.region==='شرق الطائف'?'selected':''}>شرق الطائف</option><option ${p.region==='غرب الطائف'?'selected':''}>غرب الطائف</option></select>
-          <label>الحي</label><input id="eb-prop-neigh" value="${esc(p.neighborhood||'')}" />
-          <label>الصور (إضافة/استبدال)</label><input type="file" id="eb-prop-images" multiple accept="image/*"/>
-          <div class="images-preview" id="eb-prop-preview">${(p.images||[]).map(u=>`<div class="img-thumb"><img src="${esc(u)}"/></div>`).join('')}</div>
-        </div>
-      </div>
-      <div style="margin-top:8px"><label>الصك</label><select id="eb-prop-sak"><option value="yes" ${p.sak? 'selected':''}>نعم</option><option value="no" ${!p.sak? 'selected':''}>لا</option></select></div>
-      <div style="margin-top:8px"><label>الوصف</label><textarea id="eb-prop-desc" rows="4">${esc(p.desc||'')}</textarea></div>
-      <div style="display:flex;gap:8px;margin-top:12px"><button class="btn" id="eb-save">حفظ</button><button class="btn ghost" id="eb-cancel">إلغاء</button></div>
-    `;
-    showModal(content);
-    $('#eb-prop-images').addEventListener('change', (e)=>{
-      const files = Array.from(e.target.files).slice(0,5);
-      const prev = $('#eb-prop-preview'); prev.innerHTML = '';
-      files.forEach(f=>{ const url = URL.createObjectURL(f); const el = document.createElement('div'); el.className='img-thumb'; el.innerHTML = `<img src="${url}">`; prev.appendChild(el); });
-    });
-    $('#eb-cancel').addEventListener('click', hideModal);
-    $('#eb-save').addEventListener('click', async ()=>{
-      const payload = {
-        type: $('#eb-prop-type').value,
-        title: $('#eb-prop-title').value.trim(),
-        price: $('#eb-prop-price').value.trim(),
-        area: $('#eb-prop-area').value.trim(),
-        region: $('#eb-prop-region').value,
-        neighborhood: $('#eb-prop-neigh').value.trim(),
-        sak: $('#eb-prop-sak').value === 'yes',
-        desc: $('#eb-prop-desc').value.trim()
-      };
-      const files = Array.from($('#eb-prop-images').files).slice(0,5);
-      if(files.length){
-        const uploaded = [];
-        for(let f of files){
-          const path = `props/${Date.now()}_${f.name}`;
-          const snap = await storage.ref(path).put(f);
-          const url = await snap.ref.getDownloadURL();
-          uploaded.push(url);
+        function hashPassword(password) {
+            let hash = 0;
+            for (let i = 0; i < password.length; i++) {
+                const char = password.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return hash.toString();
         }
-        payload.images = uploaded;
-      }
-      await db.collection('props').doc(propId).update(payload);
-      alert('تم الحفظ'); hideModal(); openBrokerUI(); loadCards();
-    });
-  }
 
-  // ---------- init ----------
-  (async ()=>{
-    await ensureDefaults();
-    await loadCards();
-  })();
-  </script>
+        function generateId() {
+            return Date.now().toString(36) + Math.random().toString(36).substr(2);
+        }
+
+        function checkSession() {
+            const session = JSON.parse(localStorage.getItem(DB.session) || 'null');
+            if (session && session.userId) {
+                const users = JSON.parse(localStorage.getItem(DB.users));
+                const user = users.find(u => u.id === session.userId);
+                if (user && user.isActive) {
+                    showDashboard(user);
+                    return;
+                }
+            }
+        }
+
+        function showLoginModal() {
+            document.getElementById('loginModal').classList.add('active');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.remove('active');
+            document.getElementById('loginForm').reset();
+            document.getElementById('loginAlert').innerHTML = '';
+        }
+
+        function showDashboard(user) {
+            document.getElementById('publicHeader').classList.add('hidden');
+            document.getElementById('adminHeader').classList.remove('hidden');
+            document.getElementById('currentUserName').textContent = user.username;
+
+            document.getElementById('adminDashboard').classList.add('hidden');
+            document.getElementById('brokerDashboard').classList.add('hidden');
+            document.getElementById('publicView').classList.add('hidden');
+            document.getElementById('propertyDetailView').classList.add('hidden');
+
+            if (user.role === 'admin') {
+                document.getElementById('adminDashboard').classList.remove('hidden');
+                loadAdminDashboard();
+            } else if (user.role === 'broker') {
+                document.getElementById('brokerDashboard').classList.remove('hidden');
+                loadBrokerDashboard(user);
+            }
+            
+            closeLoginModal();
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            const users = JSON.parse(localStorage.getItem(DB.users));
+            const user = users.find(u => u.username === username && u.password === hashPassword(password));
+            
+            if (user) {
+                if (!user.isActive) {
+                    showAlert('loginAlert', 'الحساب غير مفعل. يرجى التواصل مع المدير.', 'danger');
+                    return;
+                }
+                localStorage.setItem(DB.session, JSON.stringify({ userId: user.id }));
+                showDashboard(user);
+            } else {
+                showAlert('loginAlert', 'اسم المستخدم أو كلمة المرور غير صحيحة', 'danger');
+            }
+        });
+
+        function logout() {
+            localStorage.removeItem(DB.session);
+            document.getElementById('adminHeader').classList.add('hidden');
+            document.getElementById('publicHeader').classList.remove('hidden');
+            document.getElementById('loginForm').reset();
+            document.getElementById('loginAlert').innerHTML = '';
+            showPublicView();
+        }
+
+        function showAlert(elementId, message, type) {
+            const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+            document.getElementById(elementId).innerHTML = `
+                <div class="alert ${alertClass}">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                    ${message}
+                </div>
+            `;
+            setTimeout(() => {
+                document.getElementById(elementId).innerHTML = '';
+            }, 5000);
+        }
+
+        function getCurrentUser() {
+            const session = JSON.parse(localStorage.getItem(DB.session));
+            if (!session) return null;
+            const users = JSON.parse(localStorage.getItem(DB.users));
+            return users.find(u => u.id === session.userId);
+        }
+
+        function loadAdminDashboard() {
+            const properties = JSON.parse(localStorage.getItem(DB.properties));
+            const users = JSON.parse(localStorage.getItem(DB.users));
+            const brokers = users.filter(u => u.role === 'broker');
+            
+            const sortedByViews = [...properties].sort((a, b) => (b.views || 0) - (a.views || 0));
+            const mostViewed = sortedByViews.slice(0, 5);
+
+            document.getElementById('adminStats').innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-icon primary">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>${properties.length}</h3>
+                        <p>إجمالي العقارات</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon accent">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>${brokers.length}</h3>
+                        <p>إجمالي الوسطاء</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon success">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>${properties.reduce((sum, p) => sum + (p.views || 0), 0)}</h3>
+                        <p>إجمالي المشاهدات</p>
+                    </div>
+                </div>
+            `;
+
+            loadAdminProperties();
+            loadBrokersList();
+            loadSettings();
+        }
+
+        function loadAdminProperties() {
+            const properties = JSON.parse(localStorage.getItem(DB.properties));
+            const users = JSON.parse(localStorage.getItem(DB.users));
+            
+            if (properties.length === 0) {
+                document.getElementById('adminPropertiesList').innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-home"></i>
+                        <h3>لا توجد عقارات حالياً</h3>
+                        <p>ابدأ بإضافة عقار جديد</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const html = `
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>العنوان</th>
+                                <th>النوع</th>
+                                <th>السعر</th>
+                                <th>المساحة</th>
+                                <th>المنطقة</th>
+                                <th>المالك</th>
+                                <th>المشاهدات</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${properties.map(p => {
+                                const owner = users.find(u => u.id === p.ownerId);
+                                return `
+                                    <tr>
+                                        <td>${p.title}</td>
+                                        <td><span class="badge badge-primary">${p.type}</span></td>
+                                        <td style="color: var(--accent-color); font-weight: 700;">${formatPrice(p.price)}</td>
+                                        <td>${p.area} م²</td>
+                                        <td>${p.region}</td>
+                                        <td>${owner ? owner.username : 'غير معروف'}</td>
+                                        <td><i class="fas fa-eye"></i> ${p.views || 0}</td>
+                                        <td>
+                                            <button class="btn btn-primary" style="padding: 8px 12px; font-size: 13px;" onclick="editProperty('${p.id}')">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-danger" style="padding: 8px 12px; font-size: 13px;" onclick="deleteProperty('${p.id}')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            document.getElementById('adminPropertiesList').innerHTML = html;
+        }
+
+        function loadBrokersList() {
+            const users = JSON.parse(localStorage.getItem(DB.users));
+            const brokers = users.filter(u => u.role === 'broker');
+            const properties = JSON.parse(localStorage.getItem(DB.properties));
+
+            if (brokers.length === 0) {
+                document.getElementById('brokersList').innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-users"></i>
+                        <h3>لا يوجد وسطاء حالياً</h3>
+                        <p>ابدأ بإضافة وسيط جديد</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const html = `
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>اسم المستخدم</th>
+                                <th>رقم الواتساب</th>
+                                <th>عدد العقارات</th>
+                                <th>الحالة</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${brokers.map(b => {
+                                const count = properties.filter(p => p.ownerId === b.id).length;
+                                return `
+                                    <tr>
+                                        <td>${b.username}</td>
+                                        <td>${b.whatsappNumber || 'غير محدد'}</td>
+                                        <td>${count}</td>
+                                        <td>
+                                            <span class="badge ${b.isActive ? 'badge-success' : 'badge-warning'}">
+                                                ${b.isActive ? 'مفعل' : 'معطل'}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <button class="btn ${b.isActive ? 'btn-danger' : 'btn-success'}" style="padding: 8px 12px; font-size: 13px;" onclick="toggleBrokerStatus('${b.id}')">
+                                                <i class="fas fa-${b.isActive ? 'ban' : 'check'}"></i>
+                                                ${b.isActive ? 'تعطيل' : 'تفعيل'}
+                                            </button>
+                                        </td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            document.getElementById('brokersList').innerHTML = html;
+        }
+
+        function loadSettings() {
+            const settings = JSON.parse(localStorage.getItem(DB.settings));
+            document.getElementById('adminWhatsapp').value = settings.adminWhatsapp;
+        }
+
+        document.getElementById('settingsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const settings = {
+                adminWhatsapp: document.getElementById('adminWhatsapp').value
+            };
+            localStorage.setItem(DB.settings, JSON.stringify(settings));
+            alert('تم حفظ الإعدادات بنجاح');
+        });
+
+        function loadBrokerDashboard(user) {
+            const properties = JSON.parse(localStorage.getItem(DB.properties));
+            const myProperties = properties.filter(p => p.ownerId === user.id);
+
+            document.getElementById('brokerStats').innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-icon primary">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>${myProperties.length}</h3>
+                        <p>عقاراتي</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon success">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>${myProperties.reduce((sum, p) => sum + (p.views || 0), 0)}</h3>
+                        <p>إجمالي المشاهدات</p>
+                    </div>
+                </div>
+            `;
+
+            loadBrokerProperties(user);
+            loadBrokerProfile(user);
+        }
+
+        function loadBrokerProperties(user) {
+            const properties = JSON.parse(localStorage.getItem(DB.properties));
+            const myProperties = properties.filter(p => p.ownerId === user.id);
+
+            if (myProperties.length === 0) {
+                document.getElementById('brokerPropertiesList').innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-home"></i>
+                        <h3>لا توجد عقارات حالياً</h3>
+                        <p>ابدأ بإضافة عقار جديد</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const html = `
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>العنوان</th>
+                                <th>النوع</th>
+                                <th>السعر</th>
+                                <th>المساحة</th>
+                                <th>المنطقة</th>
+                                <th>المشاهدات</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${myProperties.map(p => `
+                                <tr>
+                                    <td>${p.title}</td>
+                                    <td><span class="badge badge-primary">${p.type}</span></td>
+                                    <td style="color: var(--accent-color); font-weight: 700;">${formatPrice(p.price)}</td>
+                                    <td>${p.area} م²</td>
+                                    <td>${p.region}</td>
+                                    <td><i class="fas fa-eye"></i> ${p.views || 0}</td>
+                                    <td>
+                                        <button class="btn btn-primary" style="padding: 8px 12px; font-size: 13px;" onclick="editProperty('${p.id}')">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-danger" style="padding: 8px 12px; font-size: 13px;" onclick="deleteProperty('${p.id}')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            document.getElementById('brokerPropertiesList').innerHTML = html;
+        }
+
+        function loadBrokerProfile(user) {
+            document.getElementById('brokerWhatsapp').value = user.whatsappNumber || '';
+        }
+
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const user = getCurrentUser();
+            const users = JSON.parse(localStorage.getItem(DB.users));
+            const index = users.findIndex(u => u.id === user.id);
+            users[index].whatsappNumber = document.getElementById('brokerWhatsapp').value;
+            localStorage.setItem(DB.users, JSON.stringify(users));
+            alert('تم حفظ الملف الشخصي بنجاح');
+        });
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            
+            const tabMap = {
+                'properties': 'propertiesTab',
+                'brokers': 'brokersTab',
+                'settings': 'settingsTab',
+                'myProperties': 'myPropertiesTab',
+                'profile': 'profileTab'
+            };
+            
+            document.getElementById(tabMap[tabName]).classList.add('active');
+        }
+
+        let currentPropertyImages = [];
+
+        function openPropertyModal(propertyId = null) {
+            document.getElementById('propertyModal').classList.add('active');
+            currentPropertyImages = [];
+            document.getElementById('imagePreview').innerHTML = '';
+            
+            if (propertyId) {
+                const properties = JSON.parse(localStorage.getItem(DB.properties));
+                const property = properties.find(p => p.id === propertyId);
+                if (property) {
+                    document.getElementById('propertyModalTitle').textContent = 'تعديل العقار';
+                    document.getElementById('propertyId').value = property.id;
+                    document.getElementById('propertyType').value = property.type;
+                    document.getElementById('propertyTitle').value = property.title;
+                    document.getElementById('propertyPrice').value = property.price;
+                    document.getElementById('propertyRegion').value = property.region;
+                    document.getElementById('propertyNeighborhood').value = property.neighborhood;
+                    document.getElementById('propertyArea').value = property.area;
+                    document.getElementById('propertyDeed').value = property.hasDeed;
+                    document.getElementById('propertyBank').value = property.bankOk || '';
+                    document.getElementById('propertyDescription').value = property.description;
+                    currentPropertyImages = property.images || [];
+                    
+                    if (property.hasDeed === 'نعم') {
+                        document.getElementById('bankFieldGroup').classList.remove('hidden');
+                    }
+                    
+                    renderImagePreview();
+                }
+            } else {
+                document.getElementById('propertyModalTitle').textContent = 'إضافة عقار جديد';
+                document.getElementById('propertyForm').reset();
+                document.getElementById('propertyId').value = '';
+                document.getElementById('bankFieldGroup').classList.add('hidden');
+            }
+        }
+
+        function closePropertyModal() {
+            document.getElementById('propertyModal').classList.remove('active');
+            document.getElementById('propertyForm').reset();
+            currentPropertyImages = [];
+        }
+
+        function toggleBankField() {
+            const deed = document.getElementById('propertyDeed').value;
+            if (deed === 'نعم') {
+                document.getElementById('bankFieldGroup').classList.remove('hidden');
+            } else {
+                document.getElementById('bankFieldGroup').classList.add('hidden');
+                document.getElementById('propertyBank').value = '';
+            }
+        }
+
+        document.getElementById('propertyImages').addEventListener('change', function(e) {
+            const files = Array.from(e.target.files);
+            if (currentPropertyImages.length + files.length > 5) {
+                alert('يمكن رفع 5 صور كحد أقصى');
+                return;
+            }
+            
+            files.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    currentPropertyImages.push(e.target.result);
+                    renderImagePreview();
+                };
+                reader.readAsDataURL(file);
+            });
+            
+            e.target.value = '';
+        });
+
+        function renderImagePreview() {
+            const html = currentPropertyImages.map((img, index) => `
+                <div class="image-preview-item">
+                    <img src="${img}" alt="صورة ${index + 1}">
+                    <button type="button" class="remove-image" onclick="removeImage(${index})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `).join('');
+            document.getElementById('imagePreview').innerHTML = html;
+        }
+
+        function removeImage(index) {
+            currentPropertyImages.splice(index, 1);
+            renderImagePreview();
+        }
+
+        document.getElementById('propertyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const user = getCurrentUser();
+            const properties = JSON.parse(localStorage.getItem(DB.properties));
+            
+            const propertyData = {
+                type: document.getElementById('propertyType').value,
+                title: document.getElementById('propertyTitle').value,
+                price: parseFloat(document.getElementById('propertyPrice').value),
+                region: document.getElementById('propertyRegion').value,
+                neighborhood: document.getElementById('propertyNeighborhood').value,
+                area: parseFloat(document.getElementById('propertyArea').value),
+                hasDeed: document.getElementById('propertyDeed').value,
+                bankOk: document.getElementById('propertyBank').value,
+                description: document.getElementById('propertyDescription').value,
+                images: currentPropertyImages,
+                ownerId: user.id,
+                views: 0
+            };
+            
+            const propertyId = document.getElementById('propertyId').value;
+            
+            if (propertyId) {
+                const index = properties.findIndex(p => p.id === propertyId);
+                properties[index] = { ...properties[index], ...propertyData };
+            } else {
+                propertyData.id = generateId();
+                propertyData.createdAt = Date.now();
+                properties.push(propertyData);
+            }
+            
+            localStorage.setItem(DB.properties, JSON.stringify(properties));
+            closePropertyModal();
+            
+            if (user.role === 'admin') {
+                loadAdminDashboard();
+            } else {
+                loadBrokerDashboard(user);
+            }
+            
+            alert(propertyId ? 'تم تعديل العقار بنجاح' : 'تم إضافة العقار بنجاح');
+        });
+
+        function editProperty(propertyId) {
+            openPropertyModal(propertyId);
+        }
+
+        function deleteProperty(propertyId) {
+            if (!confirm('هل أنت متأكد من حذف هذا العقار؟')) return;
+            
+            const properties = JSON.parse(localStorage.getItem(DB.properties));
+            const filtered = properties.filter(p => p.id !== propertyId);
+            localStorage.setItem(DB.properties, JSON.stringify(filtered));
+            
+            const user = getCurrentUser();
+            if (user.role === 'admin') {
+                loadAdminDashboard();
+            } else {
+                loadBrokerDashboard(user);
+            }
+            
+            alert('تم حذف العقار بنجاح');
+        }
+
+        function openBrokerModal() {
+            document.getElementById('brokerModal').classList.add('active');
+        }
+
+        function closeBrokerModal() {
+            document.getElementById('brokerModal').classList.remove('active');
+            document.getElementById('brokerForm').reset();
+        }
+
+        document.getElementById('brokerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const users = JSON.parse(localStorage.getItem(DB.users));
+            const username = document.getElementById('brokerUsername').value;
+            
+            if (users.find(u => u.username === username)) {
+                alert('اسم المستخدم موجود مسبقاً');
+                return;
+            }
+            
+            const newBroker = {
+                id: generateId(),
+                username: username,
+                password: hashPassword(document.getElementById('brokerPassword').value),
+                role: 'broker',
+                isActive: true,
+                whatsappNumber: document.getElementById('brokerWhatsappNumber').value
+            };
+            
+            users.push(newBroker);
+            localStorage.setItem(DB.users, JSON.stringify(users));
+            
+            closeBrokerModal();
+            loadBrokersList();
+            loadAdminDashboard();
+            
+            alert('تم إضافة الوسيط بنجاح');
+        });
+
+        function toggleBrokerStatus(brokerId) {
+            const users = JSON.parse(localStorage.getItem(DB.users));
+            const index = users.findIndex(u => u.id === brokerId);
+            users[index].isActive = !users[index].isActive;
+            localStorage.setItem(DB.users, JSON.stringify(users));
+            loadBrokersList();
+        }
+
+        function formatPrice(price) {
+            return new Intl.NumberFormat('ar-SA', {
+                style: 'currency',
+                currency: 'SAR',
+                minimumFractionDigits: 0
+            }).format(price);
+        }
+
+        function showPublicView() {
+            document.getElementById('adminDashboard').classList.add('hidden');
+            document.getElementById('brokerDashboard').classList.add('hidden');
+            document.getElementById('propertyDetailView').classList.add('hidden');
+            document.getElementById('publicView').classList.remove('hidden');
+            loadPublicProperties();
+        }
+
+        let currentFilters = {};
+        let currentSort = 'newest';
+
+        function loadPublicProperties() {
+            const properties = JSON.parse(localStorage.getItem(DB.properties));
+            let filtered = [...properties];
+            
+            if (currentFilters.type) {
+                filtered = filtered.filter(p => p.type === currentFilters.type);
+            }
+            if (currentFilters.region) {
+                filtered = filtered.filter(p => p.region === currentFilters.region);
+            }
+            if (currentFilters.priceMin) {
+                filtered = filtered.filter(p => p.price >= parseFloat(currentFilters.priceMin));
+            }
+            if (currentFilters.priceMax) {
+                filtered = filtered.filter(p => p.price <= parseFloat(currentFilters.priceMax));
+            }
+            if (currentFilters.areaMin) {
+                filtered = filtered.filter(p => p.area >= parseFloat(currentFilters.areaMin));
+            }
+            if (currentFilters.deed) {
+                filtered = filtered.filter(p => p.hasDeed === currentFilters.deed);
+            }
+            
+            switch(currentSort) {
+                case 'newest':
+                    filtered.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                    break;
+                case 'mostViewed':
+                    filtered.sort((a, b) => (b.views || 0) - (a.views || 0));
+                    break;
+                case 'priceLow':
+                    filtered.sort((a, b) => a.price - b.price);
+                    break;
+                case 'priceHigh':
+                    filtered.sort((a, b) => b.price - a.price);
+                    break;
+            }
+            
+            if (filtered.length === 0) {
+                document.getElementById('publicPropertiesList').innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-search"></i>
+                        <h3>لا توجد عقارات تطابق البحث</h3>
+                        <p>جرب تغيير معايير البحث</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const html = filtered.map(p => `
+                <div class="property-card">
+                    <div class="property-image">
+                        ${p.images && p.images.length > 0 
+                            ? `<img src="${p.images[0]}" alt="${p.title}">`
+                            : '<i class="fas fa-image"></i>'
+                        }
+                    </div>
+                    <div class="property-content">
+                        <div class="property-price">${formatPrice(p.price)}</div>
+                        <div class="property-title">${p.title}</div>
+                        <div class="property-details">
+                            <div class="property-detail">
+                                <i class="fas fa-map-marker-alt"></i>
+                                ${p.region}
+                            </div>
+                            <div class="property-detail">
+                                <i class="fas fa-expand"></i>
+                                ${p.area} م²
+                            </div>
+                            <div class="property-detail">
+                                <i class="fas fa-eye"></i>
+                                ${p.views || 0}
+                            </div>
+                        </div>
+                        ${p.hasDeed === 'نعم' ? '<span class="badge badge-success">يوجد صك</span>' : ''}
+                        ${p.bankOk === 'نعم' ? '<span class="badge badge-success">يقبل البنك</span>' : ''}
+                        <div class="property-actions" style="margin-top: 15px;">
+                            <button class="btn btn-primary" onclick="viewPropertyDetail('${p.id}')" style="width: 100%;">
+                                <i class="fas fa-eye"></i> عرض التفاصيل
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('publicPropertiesList').innerHTML = html;
+        }
+
+        function applyFilters() {
+            currentFilters = {
+                type: document.getElementById('filterType').value,
+                region: document.getElementById('filterRegion').value,
+                priceMin: document.getElementById('filterPriceMin').value,
+                priceMax: document.getElementById('filterPriceMax').value,
+                areaMin: document.getElementById('filterAreaMin').value,
+                deed: document.getElementById('filterDeed').value
+            };
+            loadPublicProperties();
+        }
+
+        function clearFilters() {
+            currentFilters = {};
+            document.getElementById('filterType').value = '';
+            document.getElementById('filterRegion').value = '';
+            document.getElementById('filterPriceMin').value = '';
+            document.getElementById('filterPriceMax').value = '';
+            document.getElementById('filterAreaMin').value = '';
+            document.getElementById('filterDeed').value = '';
+            loadPublicProperties();
+        }
+
+        function filterByType(type) {
+            document.getElementById('filterType').value = type;
+            applyFilters();
+        }
+
+        function sortProperties(sortType) {
+            currentSort = sortType;
+            loadPublicProperties();
+        }
+
+        function viewPropertyDetail(propertyId) {
+            const properties = JSON.parse(localStorage.getItem(DB.properties));
+            const property = properties.find(p => p.id === propertyId);
+            
+            if (!property) return;
+            
+            property.views = (property.views || 0) + 1;
+            const index = properties.findIndex(p => p.id === propertyId);
+            properties[index] = property;
+            localStorage.setItem(DB.properties, JSON.stringify(properties));
+            
+            const users = JSON.parse(localStorage.getItem(DB.users));
+            const owner = users.find(u => u.id === property.ownerId);
+            const settings = JSON.parse(localStorage.getItem(DB.settings));
+            
+            let whatsappNumber = settings.adminWhatsapp;
+            if (owner && owner.role === 'broker' && owner.whatsappNumber) {
+                whatsappNumber = owner.whatsappNumber;
+            }
+            
+            const whatsappMessage = `مرحباً، أرغب بالاستفسار عن العقار المعروض لديكم في موقع النخبة العقارية:
+العرض: ${property.title}
+السعر: ${formatPrice(property.price)}
+المساحة: ${property.area} م²
+الرابط: ${window.location.href}
+هل العقار لازال متاحاً؟`;
+            
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+            
+            let imagesHtml = '';
+            if (property.images && property.images.length > 0) {
+                imagesHtml = `
+                    <div class="main-image" id="mainImage">
+                        <img src="${property.images[0]}" alt="${property.title}">
+                    </div>
+                    <div class="thumbnail-grid">
+                        ${property.images.map((img, index) => `
+                            <div class="thumbnail ${index === 0 ? 'active' : ''}" onclick="changeMainImage('${img}', ${index})">
+                                <img src="${img}" alt="صورة ${index + 1}">
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            } else {
+                imagesHtml = `
+                    <div class="main-image">
+                        <i class="fas fa-image"></i>
+                    </div>
+                `;
+            }
+            
+            const html = `
+                <div class="detail-grid">
+                    <div class="image-gallery">
+                        ${imagesHtml}
+                    </div>
+                    <div class="detail-info">
+                        <h1>${property.title}</h1>
+                        <div class="detail-price">${formatPrice(property.price)}</div>
+                        
+                        <div class="detail-specs">
+                            <div class="spec-item">
+                                <i class="fas fa-home"></i>
+                                <div>
+                                    <strong>النوع:</strong> ${property.type}
+                                </div>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-expand"></i>
+                                <div>
+                                    <strong>المساحة:</strong> ${property.area} م²
+                                </div>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <strong>المنطقة:</strong> ${property.region}
+                                </div>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-location-dot"></i>
+                                <div>
+                                    <strong>الحي:</strong> ${property.neighborhood}
+                                </div>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-file-alt"></i>
+                                <div>
+                                    <strong>الصك:</strong> ${property.hasDeed}
+                                </div>
+                            </div>
+                            ${property.bankOk ? `
+                                <div class="spec-item">
+                                    <i class="fas fa-university"></i>
+                                    <div>
+                                        <strong>قبول البنك:</strong> ${property.bankOk}
+                                    </div>
+                                </div>
+                            ` : ''}
+                            <div class="spec-item">
+                                <i class="fas fa-eye"></i>
+                                <div>
+                                    <strong>المشاهدات:</strong> ${property.views}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin: 25px 0;">
+                            <h3 style="margin-bottom: 10px;">الوصف</h3>
+                            <p style="line-height: 1.8; color: var(--text-dark);">${property.description}</p>
+                        </div>
+                        
+                        <a href="${whatsappUrl}" target="_blank" class="btn btn-whatsapp" style="width: 100%; justify-content: center; text-decoration: none;">
+                            <i class="fab fa-whatsapp"></i>
+                            تواصل عبر واتساب
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('propertyDetailContent').innerHTML = html;
+            document.getElementById('publicView').classList.add('hidden');
+            document.getElementById('propertyDetailView').classList.remove('hidden');
+        }
+
+        function changeMainImage(imageSrc, index) {
+            document.getElementById('mainImage').innerHTML = `<img src="${imageSrc}" alt="صورة">`;
+            document.querySelectorAll('.thumbnail').forEach((t, i) => {
+                if (i === index) {
+                    t.classList.add('active');
+                } else {
+                    t.classList.remove('active');
+                }
+            });
+        }
+
+        function backFromDetail() {
+            document.getElementById('propertyDetailView').classList.add('hidden');
+            document.getElementById('publicView').classList.remove('hidden');
+        }
+
+        function notFoundWhatsApp() {
+            const settings = JSON.parse(localStorage.getItem(DB.settings));
+            const message = 'مرحباً، بحثت في موقع النخبة العقارية ولم أجد العقار الذي أبحث عنه.';
+            const url = `https://wa.me/${settings.adminWhatsapp}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        window.onload = function() {
+            initializeApp();
+            showPublicView();
+        };
+    </script>
+
 </body>
 </html>
