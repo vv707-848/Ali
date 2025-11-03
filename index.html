@@ -218,7 +218,6 @@
             padding: 25px;
             border-radius: 12px;
             margin-bottom: 30px;
-            box-shadow: var(--shadow);
         }
 
         .dashboard-header h2 {
@@ -462,8 +461,6 @@
         .category-icon:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-hover);
-            background: var(--primary-color);
-            color: white;
         }
 
         .category-icon i {
@@ -1088,8 +1085,8 @@
                 <input type="hidden" id="propertyId">
                 
                 <div class="form-group">
-                    <label>الصورة (صورة واحدة)</label>
-                    <input type="file" id="propertyImages" accept="image/*">
+                    <label>الصور (حتى 5 صور)</label>
+                    <input type="file" id="propertyImages" accept="image/*" multiple>
                     <div id="imagePreview" class="image-preview-grid"></div>
                 </div>
 
@@ -1178,6 +1175,7 @@
                 <button class="close-modal" onclick="closeBrokerModal()">&times;</button>
             </div>
             <form id="brokerForm">
+                <input type="hidden" id="brokerId">
                 <div class="form-group">
                     <label>اسم المستخدم</label>
                     <input type="text" id="brokerUsername" required>
@@ -1254,8 +1252,8 @@
                 localStorage.setItem(DB.properties, JSON.stringify([]));
             }
 
-            if (!sessionStorage.getItem(DB.settings)) {
-                sessionStorage.setItem(DB.settings, JSON.stringify({
+            if (!localStorage.getItem(DB.settings)) {
+                localStorage.setItem(DB.settings, JSON.stringify({
                     adminWhatsapp: '966535342404'
                 }));
             }
@@ -1278,7 +1276,7 @@
         }
 
         function checkSession() {
-            const session = JSON.parse(sessionStorage.getItem(DB.session) || 'null');
+            const session = JSON.parse(localStorage.getItem(DB.session) || 'null');
             if (session && session.userId) {
                 const users = JSON.parse(localStorage.getItem(DB.users));
                 const user = users.find(u => u.id === session.userId);
@@ -1316,7 +1314,7 @@
                 document.getElementById('brokerDashboard').classList.remove('hidden');
                 loadBrokerDashboard(user);
             }
-            
+
             closeLoginModal();
         }
 
@@ -1324,16 +1322,16 @@
             e.preventDefault();
             const username = document.getElementById('loginUsername').value;
             const password = document.getElementById('loginPassword').value;
-            
+
             const users = JSON.parse(localStorage.getItem(DB.users));
             const user = users.find(u => u.username === username && u.password === hashPassword(password));
-            
+
             if (user) {
                 if (!user.isActive) {
                     showAlert('loginAlert', 'الحساب غير مفعل. يرجى التواصل مع المدير.', 'danger');
                     return;
                 }
-                sessionStorage.setItem(DB.session, JSON.stringify({ userId: user.id }));
+                localStorage.setItem(DB.session, JSON.stringify({ userId: user.id }));
                 showDashboard(user);
             } else {
                 showAlert('loginAlert', 'اسم المستخدم أو كلمة المرور غير صحيحة', 'danger');
@@ -1341,7 +1339,7 @@
         });
 
         function logout() {
-            sessionStorage.removeItem(DB.session);
+            localStorage.removeItem(DB.session);
             document.getElementById('adminHeader').classList.add('hidden');
             document.getElementById('publicHeader').classList.remove('hidden');
             document.getElementById('loginForm').reset();
@@ -1363,7 +1361,7 @@
         }
 
         function getCurrentUser() {
-            const session = JSON.parse(sessionStorage.getItem(DB.session));
+            const session = JSON.parse(localStorage.getItem(DB.session));
             if (!session) return null;
             const users = JSON.parse(localStorage.getItem(DB.users));
             return users.find(u => u.id === session.userId);
@@ -1373,9 +1371,6 @@
             const properties = JSON.parse(localStorage.getItem(DB.properties));
             const users = JSON.parse(localStorage.getItem(DB.users));
             const brokers = users.filter(u => u.role === 'broker');
-            
-            const sortedByViews = [...properties].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-            const mostViewed = sortedByViews.slice(0, 5);
 
             document.getElementById('adminStats').innerHTML = `
                 <div class="stat-card">
@@ -1396,7 +1391,16 @@
                         <p>إجمالي الوسطاء</p>
                     </div>
                 </div>
-                `;
+                <div class="stat-card">
+                    <div class="stat-icon success">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>${properties.reduce((sum, p) => sum + (p.views || 0), 0)}</h3>
+                        <p>إجمالي المشاهدات</p>
+                    </div>
+                </div>
+            `;
 
             loadAdminProperties();
             loadBrokersList();
@@ -1406,7 +1410,7 @@
         function loadAdminProperties() {
             const properties = JSON.parse(localStorage.getItem(DB.properties));
             const users = JSON.parse(localStorage.getItem(DB.users));
-            
+
             if (properties.length === 0) {
                 document.getElementById('adminPropertiesList').innerHTML = `
                     <div class="empty-state">
@@ -1429,7 +1433,7 @@
                                 <th>المساحة</th>
                                 <th>المنطقة</th>
                                 <th>المالك</th>
-                                
+                                <th>المشاهدات</th>
                                 <th>الإجراءات</th>
                             </tr>
                         </thead>
@@ -1444,7 +1448,7 @@
                                         <td>${p.area} م²</td>
                                         <td>${p.region}</td>
                                         <td>${owner ? owner.username : 'غير معروف'}</td>
-                                        
+                                        <td><i class="fas fa-eye"></i> ${p.views || 0}</td>
                                         <td>
                                             <button class="btn btn-primary" style="padding: 8px 12px; font-size: 13px;" onclick="editProperty('${p.id}')">
                                                 <i class="fas fa-edit"></i>
@@ -1505,9 +1509,14 @@
                                             </span>
                                         </td>
                                         <td>
+                                            <button class="btn btn-primary" style="padding: 8px 12px; font-size: 13px;" onclick="editBroker('${b.id}')">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-danger" style="padding: 8px 12px; font-size: 13px;" onclick="deleteBroker('${b.id}')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
                                             <button class="btn ${b.isActive ? 'btn-danger' : 'btn-success'}" style="padding: 8px 12px; font-size: 13px;" onclick="toggleBrokerStatus('${b.id}')">
-                                                <i class="fas fa-${b.isActive ? 'ban' : 'check'}"></i>
-                                                ${b.isActive ? 'تعطيل' : 'تفعيل'}
+                                                <i class="fas fa-${b.isActive ? 'ban' : 'check'}"></i> ${b.isActive ? 'تعطيل' : 'تفعيل'}
                                             </button>
                                         </td>
                                     </tr>
@@ -1521,7 +1530,7 @@
         }
 
         function loadSettings() {
-            const settings = JSON.parse(sessionStorage.getItem(DB.settings));
+            const settings = JSON.parse(localStorage.getItem(DB.settings));
             document.getElementById('adminWhatsapp').value = settings.adminWhatsapp;
         }
 
@@ -1530,7 +1539,7 @@
             const settings = {
                 adminWhatsapp: document.getElementById('adminWhatsapp').value
             };
-            sessionStorage.setItem(DB.settings, JSON.stringify(settings));
+            localStorage.setItem(DB.settings, JSON.stringify(settings));
             alert('تم حفظ الإعدادات بنجاح');
         });
 
@@ -1548,7 +1557,16 @@
                         <p>عقاراتي</p>
                     </div>
                 </div>
-                `;
+                <div class="stat-card">
+                    <div class="stat-icon success">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>${myProperties.reduce((sum, p) => sum + (p.views || 0), 0)}</h3>
+                        <p>إجمالي المشاهدات</p>
+                    </div>
+                </div>
+            `;
 
             loadBrokerProperties(user);
             loadBrokerProfile(user);
@@ -1579,7 +1597,7 @@
                                 <th>السعر</th>
                                 <th>المساحة</th>
                                 <th>المنطقة</th>
-                                
+                                <th>المشاهدات</th>
                                 <th>الإجراءات</th>
                             </tr>
                         </thead>
@@ -1591,7 +1609,7 @@
                                     <td style="color: var(--accent-color); font-weight: 700;">${formatPrice(p.price)}</td>
                                     <td>${p.area} م²</td>
                                     <td>${p.region}</td>
-                                    
+                                    <td><i class="fas fa-eye"></i> ${p.views || 0}</td>
                                     <td>
                                         <button class="btn btn-primary" style="padding: 8px 12px; font-size: 13px;" onclick="editProperty('${p.id}')">
                                             <i class="fas fa-edit"></i>
@@ -1626,9 +1644,9 @@
         function switchTab(tabName) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            
+
             event.target.classList.add('active');
-            
+
             const tabMap = {
                 'properties': 'propertiesTab',
                 'brokers': 'brokersTab',
@@ -1636,7 +1654,7 @@
                 'myProperties': 'myPropertiesTab',
                 'profile': 'profileTab'
             };
-            
+
             document.getElementById(tabMap[tabName]).classList.add('active');
         }
 
@@ -1646,7 +1664,7 @@
             document.getElementById('propertyModal').classList.add('active');
             currentPropertyImages = [];
             document.getElementById('imagePreview').innerHTML = '';
-            
+
             if (propertyId) {
                 const properties = JSON.parse(localStorage.getItem(DB.properties));
                 const property = properties.find(p => p.id === propertyId);
@@ -1663,17 +1681,18 @@
                     document.getElementById('propertyBank').value = property.bankOk || '';
                     document.getElementById('propertyDescription').value = property.description;
                     currentPropertyImages = property.images || [];
-                    
+
                     if (property.hasDeed === 'نعم') {
                         document.getElementById('bankFieldGroup').classList.remove('hidden');
                     }
-                    
+
                     renderImagePreview();
                 }
             } else {
                 document.getElementById('propertyModalTitle').textContent = 'إضافة عقار جديد';
                 document.getElementById('propertyForm').reset();
                 document.getElementById('propertyId').value = '';
+                
                 document.getElementById('bankFieldGroup').classList.add('hidden');
             }
         }
@@ -1696,15 +1715,20 @@
 
         document.getElementById('propertyImages').addEventListener('change', function(e) {
             const files = Array.from(e.target.files);
-            if (files.length === 0) return;
-            // allow only one image per property (replace existing)
-            const file = files[0];
-            const reader = new FileReader();
-            reader.onload = function(ev) {
-                currentPropertyImages = [ev.target.result];
-                renderImagePreview();
-            };
-            reader.readAsDataURL(file);
+            if (currentPropertyImages.length + files.length > 5) {
+                alert('يمكن رفع 5 صور كحد أقصى');
+                return;
+            }
+
+            files.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    currentPropertyImages.push(e.target.result);
+                    renderImagePreview();
+                };
+                reader.readAsDataURL(file);
+            });
+
             e.target.value = '';
         });
 
@@ -1743,7 +1767,7 @@
                 description: document.getElementById('propertyDescription').value,
                 images: currentPropertyImages,
                 ownerId: user.id,
-                isActive: true
+                views: 0
             };
             
             const propertyId = document.getElementById('propertyId').value;
@@ -1801,31 +1825,51 @@
 
         document.getElementById('brokerForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
             const users = JSON.parse(localStorage.getItem(DB.users));
+            const brokerId = document.getElementById('brokerId').value;
             const username = document.getElementById('brokerUsername').value;
-            
+            const password = document.getElementById('brokerPassword').value;
+            const whatsapp = document.getElementById('brokerWhatsappNumber').value;
+
+            if (brokerId) {
+                // Edit existing broker
+                const index = users.findIndex(u => u.id === brokerId);
+                if (index === -1) return;
+                if (users.some((u, i) => u.username === username && i !== index)) {
+                    alert('اسم المستخدم موجود مسبقاً');
+                    return;
+                }
+                users[index].username = username;
+                if (password) {
+                    users[index].password = hashPassword(password);
+                }
+                users[index].whatsappNumber = whatsapp;
+                localStorage.setItem(DB.users, JSON.stringify(users));
+                closeBrokerModal();
+                loadBrokersList();
+                loadAdminDashboard();
+                alert('تم تعديل الوسيط بنجاح');
+                return;
+            }
+
+            // Add new broker
             if (users.find(u => u.username === username)) {
                 alert('اسم المستخدم موجود مسبقاً');
                 return;
             }
-            
             const newBroker = {
                 id: generateId(),
                 username: username,
-                password: hashPassword(document.getElementById('brokerPassword').value),
+                password: hashPassword(password),
                 role: 'broker',
                 isActive: true,
-                whatsappNumber: document.getElementById('brokerWhatsappNumber').value
+                whatsappNumber: whatsapp
             };
-            
             users.push(newBroker);
             localStorage.setItem(DB.users, JSON.stringify(users));
-            
             closeBrokerModal();
             loadBrokersList();
             loadAdminDashboard();
-            
             alert('تم إضافة الوسيط بنجاح');
         });
 
@@ -1837,8 +1881,32 @@
             loadBrokersList();
         }
 
+        function editBroker(brokerId) {
+            const users = JSON.parse(localStorage.getItem(DB.users));
+            const broker = users.find(u => u.id === brokerId);
+            if (!broker) return;
+            document.getElementById('brokerId').value = broker.id;
+            document.getElementById('brokerUsername').value = broker.username;
+            document.getElementById('brokerPassword').value = '';
+            document.getElementById('brokerWhatsappNumber').value = broker.whatsappNumber || '';
+            document.getElementById('brokerModal').classList.add('active');
+        }
+
+        function deleteBroker(brokerId) {
+            let users = JSON.parse(localStorage.getItem(DB.users));
+            const index = users.findIndex(u => u.id === brokerId);
+            if (index === -1) return;
+            users.splice(index, 1);
+            let properties = JSON.parse(localStorage.getItem(DB.properties));
+            properties = properties.filter(p => p.ownerId !== brokerId);
+            localStorage.setItem(DB.users, JSON.stringify(users));
+            localStorage.setItem(DB.properties, JSON.stringify(properties));
+            loadAdminDashboard();
+            alert('تم حذف الوسيط وجميع عقاراته بنجاح');
+        }
+
         function formatPrice(price) {
-            return new Intl.NumberFormat('ar-SA', {
+            return new Intl.NumberFormat('en-US', {
                 style: 'currency',
                 currency: 'SAR',
                 minimumFractionDigits: 0
@@ -1848,6 +1916,7 @@
         function showPublicView() {
             document.getElementById('adminDashboard').classList.add('hidden');
             document.getElementById('brokerDashboard').classList.add('hidden');
+
             document.getElementById('propertyDetailView').classList.add('hidden');
             document.getElementById('publicView').classList.remove('hidden');
             loadPublicProperties();
@@ -1858,8 +1927,8 @@
 
         function loadPublicProperties() {
             const properties = JSON.parse(localStorage.getItem(DB.properties));
-            let filtered = [...properties].filter(p => p.isActive !== false);
-            
+            let filtered = [...properties];
+
             if (currentFilters.type) {
                 filtered = filtered.filter(p => p.type === currentFilters.type);
             }
@@ -1878,14 +1947,13 @@
             if (currentFilters.deed) {
                 filtered = filtered.filter(p => p.hasDeed === currentFilters.deed);
             }
-            
+
             switch(currentSort) {
                 case 'newest':
                     filtered.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
                     break;
                 case 'mostViewed':
-                    // تم إزالة الترتيب حسب المشاهدات - سيعامل كـ الأحدث
-                    filtered.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                    filtered.sort((a, b) => (b.views || 0) - (a.views || 0));
                     break;
                 case 'priceLow':
                     filtered.sort((a, b) => a.price - b.price);
@@ -1894,7 +1962,7 @@
                     filtered.sort((a, b) => b.price - a.price);
                     break;
             }
-            
+
             if (filtered.length === 0) {
                 document.getElementById('publicPropertiesList').innerHTML = `
                     <div class="empty-state">
@@ -1905,7 +1973,7 @@
                 `;
                 return;
             }
-            
+
             const html = filtered.map(p => `
                 <div class="property-card">
                     <div class="property-image">
@@ -1926,7 +1994,11 @@
                                 <i class="fas fa-expand"></i>
                                 ${p.area} م²
                             </div>
+                            <div class="property-detail">
+                                <i class="fas fa-eye"></i>
+                                ${p.views || 0}
                             </div>
+                        </div>
                         ${p.hasDeed === 'نعم' ? '<span class="badge badge-success">يوجد صك</span>' : ''}
                         ${p.bankOk === 'نعم' ? '<span class="badge badge-success">يقبل البنك</span>' : ''}
                         <div class="property-actions" style="margin-top: 15px;">
@@ -1937,7 +2009,7 @@
                     </div>
                 </div>
             `).join('');
-            
+
             document.getElementById('publicPropertiesList').innerHTML = html;
         }
 
@@ -1977,26 +2049,34 @@
         function viewPropertyDetail(propertyId) {
             const properties = JSON.parse(localStorage.getItem(DB.properties));
             const property = properties.find(p => p.id === propertyId);
-            
+
             if (!property) return;
-const users = JSON.parse(localStorage.getItem(DB.users));
+
+            property.views = (property.views || 0) + 1;
+            const index = properties.findIndex(p => p.id === propertyId);
+            properties[index] = property;
+            localStorage.setItem(DB.properties, JSON.stringify(properties));
+
+            const users = JSON.parse(localStorage.getItem(DB.users));
             const owner = users.find(u => u.id === property.ownerId);
-            const settings = JSON.parse(sessionStorage.getItem(DB.settings));
-            
+            const settings = JSON.parse(localStorage.getItem(DB.settings));
+
             let whatsappNumber = settings.adminWhatsapp;
             if (owner && owner.role === 'broker' && owner.whatsappNumber) {
                 whatsappNumber = owner.whatsappNumber;
             }
-            
+
             const whatsappMessage = `مرحباً، أرغب بالاستفسار عن العقار المعروض لديكم في موقع النخبة العقارية:
 العرض: ${property.title}
 السعر: ${formatPrice(property.price)}
 المساحة: ${property.area} م²
+المنطقة: ${property.region}
+الحي: ${property.neighborhood}
 الرابط: ${window.location.href}
 هل العقار لازال متاحاً؟`;
-            
+
             const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
-            
+
             let imagesHtml = '';
             if (property.images && property.images.length > 0) {
                 imagesHtml = `
@@ -2018,7 +2098,7 @@ const users = JSON.parse(localStorage.getItem(DB.users));
                     </div>
                 `;
             }
-            
+
             const html = `
                 <div class="detail-grid">
                     <div class="image-gallery">
@@ -2067,7 +2147,13 @@ const users = JSON.parse(localStorage.getItem(DB.users));
                                     </div>
                                 </div>
                             ` : ''}
+                            <div class="spec-item">
+                                <i class="fas fa-eye"></i>
+                                <div>
+                                    <strong>المشاهدات:</strong> ${property.views}
+                                </div>
                             </div>
+                        </div>
                         
                         <div style="margin: 25px 0;">
                             <h3 style="margin-bottom: 10px;">الوصف</h3>
@@ -2081,7 +2167,7 @@ const users = JSON.parse(localStorage.getItem(DB.users));
                     </div>
                 </div>
             `;
-            
+
             document.getElementById('propertyDetailContent').innerHTML = html;
             document.getElementById('publicView').classList.add('hidden');
             document.getElementById('propertyDetailView').classList.remove('hidden');
@@ -2100,11 +2186,17 @@ const users = JSON.parse(localStorage.getItem(DB.users));
 
         function backFromDetail() {
             document.getElementById('propertyDetailView').classList.add('hidden');
-            document.getElementById('publicView').classList.remove('hidden');
+            const user = getCurrentUser();
+            if (user) {
+                showDashboard(user);
+            } else {
+                document.getElementById('publicView').classList.remove('hidden');
+                loadPublicProperties();
+            }
         }
 
         function notFoundWhatsApp() {
-            const settings = JSON.parse(sessionStorage.getItem(DB.settings));
+            const settings = JSON.parse(localStorage.getItem(DB.settings));
             const message = 'مرحباً، بحثت في موقع النخبة العقارية ولم أجد العقار الذي أبحث عنه.';
             const url = `https://wa.me/${settings.adminWhatsapp}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
@@ -2115,6 +2207,5 @@ const users = JSON.parse(localStorage.getItem(DB.users));
             showPublicView();
         };
     </script>
-
 </body>
 </html>
